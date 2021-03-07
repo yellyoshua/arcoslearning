@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import avatar from '../avatars';
 import Game from './Game';
-import useLocalState from '../store';
+import { AppContext } from '../store';
 
 const Home = () => {
-  const [localStore, localActions] = useLocalState();
+  const [app, actions] = useContext(AppContext);
 
-  if (!localStore.avatar) {
+  if (!app.avatar) {
     return (
       <section className="container">
         <div className="container-fluid">
@@ -15,7 +15,7 @@ const Home = () => {
         <div className="row justify-content-center">
           {avatar.list.map((avatar, key) => {
             const selectAvatar = () => {
-              localActions.addAvatar(avatar);
+              actions.addAvatar(avatar);
             };
             return (
               <div key={key} onClick={selectAvatar} className="game-cards-options card m-3" style={{height: 64, width: 64}}>
@@ -28,7 +28,7 @@ const Home = () => {
     );
   }
 
-  if (localStore.currentGame) {
+  if (app.currentGame) {
     return <Game />;
   }
 
@@ -39,9 +39,9 @@ const Home = () => {
           <p className="init-greeting">Selecciona con que quieres comenzar</p>
         </div>
         <div className="row justify-content-center">
-          {localStore.gameOptions.map((game, key) => {
+          {app.gameOptions.map((game, key) => {
             const selectGameType = () => {
-              localActions.selectGameType(game.game);
+              actions.selectGameType(game.game);
             };
             return (
               <div key={key} onClick={selectGameType} className="game-cards-options card m-3" style={{width: '18rem', background: game.background}}>
@@ -54,8 +54,8 @@ const Home = () => {
         </div>
       </section>
       <section className="footer container">
-        <blockquote class="blockquote text-center">
-          <footer class="blockquote-footer">
+        <blockquote className="blockquote text-center">
+          <footer className="blockquote-footer">
             Por <cite title="Briggitte Arcos">Briggitte Arcos</cite>
           </footer>
         </blockquote>

@@ -1,10 +1,10 @@
-import React from 'react';
-import useLocalState from '../store';
+import React, { useContext } from 'react';
+import { AppContext } from '../store';
 
 const Results = () => {
-  const [localStore, localActions] = useLocalState();
+  const [app, actions] = useContext(AppContext);
   const restartGame = () => {
-    localActions.restartGame();
+    actions.restartGame();
   };
 
   return (
@@ -26,7 +26,7 @@ const Results = () => {
             </tr>
           </thead>
           <tbody>
-            {localStore.played.sort(sortCalifications).map((game, key) => {
+            {app.played.sort(sortCalifications).map((game, key) => {
               return (
                 <tr key={key}>
                   <th scope="row">
@@ -48,8 +48,8 @@ const Results = () => {
         </table>
       </section>
       <section className="footer container">
-        <blockquote class="blockquote text-center">
-          <footer class="blockquote-footer">
+        <blockquote className="blockquote text-center">
+          <footer className="blockquote-footer">
             Por <cite title="Briggitte Arcos">Briggitte Arcos</cite>
           </footer>
         </blockquote>

@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import useLocalState from './store';
+import { AppContext } from './store';
 import Header from './components/Header';
 import Register from './components/Register';
 import Home from './components/Home';
 import Result from './components/Result';
 
 function RouterComponent() {
-  const [localStore] = useLocalState();
+  const [app] = useContext(AppContext);
 
   return (
     <Router>
@@ -17,7 +17,7 @@ function RouterComponent() {
           exact
           path="/"
           render={(props) => {
-            if (localStore.user) {
+            if (app.user) {
               return <Home {...props} />;
             }
             return <Register {...props} />;
@@ -27,7 +27,7 @@ function RouterComponent() {
           exact
           path="/played"
           render={(props) => {
-            if (localStore.played) {
+            if (app.played) {
               return <Result {...props} />;
             }
             return props.history.push('/');

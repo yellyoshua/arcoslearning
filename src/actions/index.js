@@ -1,34 +1,38 @@
 //USER
-export const addUser = (store, newUser) => {
+export const addUser = (store, setState) => (payload) => {
+  const newUser = payload;
   let state = {
-    ...store.state,
+    ...store,
     user: newUser
   };
 
   window.localStorage.setItem('store', JSON.stringify(state));
-  store.setState(state);
+  return setState(state);
 };
-export const addAvatar = (store, avatar) => {
+
+export const addAvatar = (store, setState) => (payload) => {
+  const avatar = payload;
   let state = {
-    ...store.state,
+    ...store,
     avatar: avatar
   };
 
   window.localStorage.setItem('store', JSON.stringify(state));
-  store.setState(state);
+  return setState(state);
 };
-export const removeAvatar = (store) => {
+
+export const removeAvatar = (store, setState) => () => {
   let state = {
-    ...store.state,
+    ...store,
     avatar: null
   };
 
   window.localStorage.setItem('store', JSON.stringify(state));
-  store.setState(state);
+  return setState(state);
 };
-export const removeUser = (store) => {
+export const removeUser = (store, setState) => () => {
   let state = {
-    ...store.state,
+    ...store,
     user: null,
     avatar: null,
     currentPage: null,
@@ -36,26 +40,27 @@ export const removeUser = (store) => {
   };
 
   window.localStorage.setItem('store', JSON.stringify(state));
-  store.setState(state);
+  return setState(state);
 };
 //USER
 //GAME
-export const startGame = (store) => {
+export const startGame = (store, setState) => () => {
   let state = {
-    ...store.state,
+    ...store,
     timeStart: Date.now(),
     currentPage: 0
   };
 
   window.localStorage.setItem('store', JSON.stringify(state));
-  store.setState(state);
+  return setState(state);
 };
-export const endGame = (store, endAnswer) => {
+export const endGame = (store, setState) => (payload) => {
+  const endAnswer = payload;
   let state = {
-    ...store.state,
+    ...store,
     timeEnd: Date.now()
   };
-  state.answers[state.currentGame].push({page: state.currentPage, value: endAnswer});
+  state.answers[state.currentGame].push({ page: state.currentPage, value: endAnswer });
 
   let playedSchema = {
     questionsCalified: [],
@@ -110,7 +115,7 @@ export const endGame = (store, endAnswer) => {
   const useranswers = state.answers[state.currentGame];
   useranswers.forEach((useranswer, iAnswer) => {
     let answers = [];
-    let reviewtest = {question: null, wrong: false};
+    let reviewtest = { question: null, wrong: false };
 
     const gameanswers = state.questions[state.currentGame][iAnswer].answer;
 
@@ -171,11 +176,12 @@ export const endGame = (store, endAnswer) => {
   state.answers.math = [];
 
   window.localStorage.setItem('store', JSON.stringify(state));
-  return store.setState(state);
+  return setState(state);
 };
-export const goHome = (store) => {
+
+export const goHome = (store, setState) => () => {
   let state = {
-    ...store.state,
+    ...store,
     timeStart: null,
     timeEnd: null,
     currentPage: null,
@@ -183,39 +189,42 @@ export const goHome = (store) => {
   };
 
   window.localStorage.setItem('store', JSON.stringify(state));
-  store.setState(state);
+  return setState(state);
 };
-export const goNext = (store, answer, actions) => {
-  let currentPage = store.state.currentPage + 1;
+
+export const goNext = (store, setState) => (payload) => {
+  const answer = payload;
+  let currentPage = store.currentPage + 1;
 
   let state = {
-    ...store.state,
+    ...store,
     currentPage: currentPage
   };
-  state.answers[state.currentGame].push({page: store.state.currentPage, value: answer});
+  state.answers[state.currentGame].push({ page: store.currentPage, value: answer });
 
   window.localStorage.setItem('store', JSON.stringify(state));
-  store.setState(state);
+  return setState(state);
 };
 
-export const selectGameType = (store, gameType) => {
+export const selectGameType = (store, setState) => (payload) => {
+  const gameType = payload;
   let state = {
-    ...store.state,
+    ...store,
     currentGame: gameType
   };
 
   window.localStorage.setItem('store', JSON.stringify(state));
-  store.setState(state);
+  return setState(state);
 };
-export const restartGame = (store) => {
+export const restartGame = (store, setState) => () => {
   let state = {
-    ...store.state,
+    ...store,
     played: [],
     currentPage: null,
     currentGame: null
   };
 
   window.localStorage.setItem('store', JSON.stringify(state));
-  store.setState(state);
+  return setState(state);
 };
 //GAME
