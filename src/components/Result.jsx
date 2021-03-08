@@ -16,29 +16,28 @@ const Results = () => {
             Limpiar lista
           </p>
         </div>
-        <table style={{borderRadius: 10}} className="text-center table table-light table-hover table-responsive-sm">
+        <table style={{ borderRadius: 10 }} className="text-center table table-light table-hover table-responsive-sm">
           <thead>
             <tr>
               <th scope="col">Avatar</th>
               <th scope="col">Usuario</th>
-              <th scope="col">Aciertos</th>
+              <th scope="col">Juego</th>
               <th scope="col">Calificaci&oacute;n</th>
             </tr>
           </thead>
           <tbody>
-            {app.played.sort(sortCalifications).map((game, key) => {
+            {app.scores.sort(sortScores).map((score, key) => {
               return (
                 <tr key={key}>
                   <th scope="row">
-                    <img src={game.avatar} width="40" height="40" className="d-inline-block align-top mx-3" alt={'avatar-' + game.user} />
+                    <img src={score.avatar} width="40" height="40" className="d-inline-block align-top mx-3" alt={'avatar-' + score.user} />
                   </th>
-                  <td>{game.user}</td>
-                  <td>
-                    {game.passed}/{game.failed + game.passed}
-                  </td>
+                  <td>{score.user}</td>
+                  <td>{score.game}</td>
                   <td className="d-flex justify-content-center align-items-center">
-                    <p className="text-white" style={{padding: '0px 10px', background: game.color, borderRadius: '50%'}}>
-                      {game.calification}
+                    <p>{score.qualification}/100</p>
+                    <p className="text-white" style={{ padding: '0px 10px', background: score.color, borderRadius: '50%' }}>
+                      {score.value}
                     </p>
                   </td>
                 </tr>
@@ -57,8 +56,8 @@ const Results = () => {
     </React.Fragment>
   );
 };
-const sortCalifications = (game1, game2) => {
-  return game2.percent - game1.percent;
+const sortScores = (score1, score2) => {
+  return score2.qualification - score1.qualification;
 };
 
 export default Results;

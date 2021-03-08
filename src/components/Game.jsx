@@ -1,34 +1,43 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import useGame from 'hooks/useGame';
 import { AppContext } from '../store';
-import stateComponent from '../states';
+import Question from './Question';
 
-const Questions = () => {
+const GameComponent = ({ questions = [], timer = 5 }) => {
+  const [game, gameAction] = useGame({ questions });
+  const [rank, setRank] = useState(null);
   const [app, actions] = useContext(AppContext);
-  const [counter, setCounter] = stateComponent('count', 5);
-  // Third Attempts
-  React.useEffect(() => {
-    if (!app.currentPage && app.currentPage !== 0) {
-      const timer = setInterval(() => setCounter(counter - 1), 1000);
+  const [started, setStart] = useState(false);
+  const [counter, setCounter] = useState(timer);
+
+  useEffect(() => {
+    if (!started) {
       if (counter === 0) {
-        clearInterval(timer);
-        return actions.startGame();
+        setStart(true);
+        return () => {};
       }
+      const timer = setTimeout(() => setCounter(counter - 1), 1000);
+      return () => clearTimeout(timer);
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [counter]);
 
   const goNext = (answer) => {
-    if (app.currentPage === app.questions[app.currentGame].length - 1) {
-      return actions.endGame(answer);
+    const rank = gameAction.goNextQuestion(answer);
+    if (rank) {
+      const game = getGameName(app.gameOptions, app.currentGame);
+      actions.addScore({ ...rank, user: app.user, avatar: app.avatar, game });
     }
-    return actions.goNext(answer, actions);
+    setRank(rank);
   };
 
-  if (!app.currentPage && app.currentPage !== 0) {
+  if (!started) {
     return (
       <section className="container">
         <div className="container-fluid">
           <p className="init-greeting">Bueno {app.user}, vamos a comenzar con esto.</p>
-          <p className="init-greeting text-primary">{showGameName(app.gameOptions, app.currentGame, actions.goHome)}</p>
+          <p className="init-greeting text-primary">{getGameName(app.gameOptions, app.currentGame)}</p>
         </div>
         <div className="row justify-content-center">
           <div className="card m-3" style={{ width: '18rem' }}>
@@ -45,47 +54,38 @@ const Questions = () => {
       </section>
     );
   }
-  if (app.currentPage === 0 || app.currentPage) {
-    let question = app.questions[app.currentGame][app.currentPage];
-    return (
-      <div>
-        <div className="col">
-          <p>{question.question}</p>
-        </div>
-        <div className="text-center col">
-          <div className="row justify-content-between align-items-center">
-            {question.options.map((option, key) => {
-              return (
-                <div key={key} onClick={goNext.bind(this, option)} className="col-6 p-2">
-                  <p className="text-center m-0 option-answer-select py-3 py-2">{option}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    );
+
+  if (questions.length > game.question) {
+    let page = questions[game.question];
+    return <Question name={page.question} options={page.options} onAnswer={goNext} />;
   }
-  return null;
-  //HERE POST Q & ANSWERS
+
+  return (
+    <div>
+      <h2 className="text-center mb-3">SCORE</h2>
+      {rank && <h3 className="text-center my-3">{rank.qualification}</h3>}
+      <div className="text-center">
+        <button onClick={actions.goHome} className="btn btn-danger mx-3">
+          Jugar otra vez
+        </button>
+        <Link to="/scores" className="btn btn-success mx-3">
+          Jugadas
+        </Link>
+      </div>
+    </div>
+  );
 };
 
-const showGameName = (gameOptions, currentGame, goBack) => {
-  let gameSelected = [];
-  gameOptions.map((game, index) => {
-    if (game.game === currentGame) {
-      gameSelected.push(game);
-      return game;
-    }
-    return game;
+const getGameName = (gameOptions = [], gameName) => {
+  const found = gameOptions.find(({ game }) => {
+    return game === gameName;
   });
 
-  if (!gameSelected.length) {
-    goBack();
-    return '';
+  if (found) {
+    return found.name;
+  } else {
+    return '---';
   }
-
-  return gameSelected[0].name;
 };
 
-export default Questions;
+export default GameComponent;

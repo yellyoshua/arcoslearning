@@ -9,7 +9,9 @@ import scream from './icons8-scream-64.png';
 import supermario from './icons8-super-mario-64.png';
 import walterwhite from './icons8-walter-white-64.png';
 
-export default {
+const avatars = {
   list: [fridakahlo, bender, homero, jake, frenchfries, soda, taco, scream, supermario, walterwhite],
-  object: {fridakahlo, bender, homero, jake, frenchfries, soda, taco, scream, supermario, walterwhite}
+  object: { fridakahlo, bender, homero, jake, frenchfries, soda, taco, scream, supermario, walterwhite }
 };
+
+export default avatars;

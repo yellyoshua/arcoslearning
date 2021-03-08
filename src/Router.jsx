@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { AppContext } from './store';
 import Header from './components/Header';
 import Register from './components/Register';
@@ -17,7 +17,7 @@ function RouterComponent() {
           exact
           path="/"
           render={(props) => {
-            if (app.user) {
+            if (app.user && app.avatar) {
               return <Home {...props} />;
             }
             return <Register {...props} />;
@@ -25,9 +25,9 @@ function RouterComponent() {
         />
         <Route
           exact
-          path="/played"
+          path="/scores"
           render={(props) => {
-            if (app.played) {
+            if (app.scores) {
               return <Result {...props} />;
             }
             return props.history.push('/');
