@@ -1,12 +1,25 @@
+// @ts-check
 import React, { useContext } from 'react';
-import Game from './Game';
-import { AppContext } from 'store';
+import { Navigate } from 'react-router-dom';
+import { AppContext } from '../store';
+import { useGameStore, useUserStore } from 'flux/stores';
 
 const Home = () => {
-  const [app, actions] = useContext(AppContext);
+  const { loading, user } = useUserStore();
+  const { quiz } = useGameStore();
+  const [app] = useContext(AppContext);
 
-  if (app.currentGame) {
-    return <Game questions={app.questions[app.currentGame] || []} />;
+  if (!user || !user.avatar || !user.name) {
+    return <Navigate to="/register" />;
+  }
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (quiz) {
+    return <p>CURRENT QUIZ GAME: {quiz}</p>;
+    // return <Game questions={app.questions[app.currentGame] || []} />;
   }
 
   return (
@@ -18,7 +31,7 @@ const Home = () => {
         <div className="row justify-content-center">
           {app.gameOptions.map((game, key) => {
             const selectGameType = () => {
-              actions.selectGameType(game.game);
+              // actions.selectGameType(game.game);
             };
             return (
               <div key={key} onClick={selectGameType} className="game-cards-options card m-3" style={{ width: '18rem', background: game.background }}>

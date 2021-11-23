@@ -5,9 +5,8 @@ import { persist, devtools } from 'zustand/middleware';
 
 /** @type {UserStore} */
 const initialState = {
-  id: null,
-  loading: false,
-  username: null
+  user: null,
+  loading: false
 };
 
 export const useUserStore = createStore(

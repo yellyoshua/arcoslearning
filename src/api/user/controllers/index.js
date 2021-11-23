@@ -1,4 +1,5 @@
 // @ts-check
+/** @typedef {import("types").UserSession} UserSession  */
 import { UsersRepository } from '../repository';
 
 export class UsersController {
@@ -7,18 +8,18 @@ export class UsersController {
   }
 
   /**
-   * @param {string} username name for the user session
-   * @returns {Promise<{ id: string, name: string}>} session
+   * @param {string} userName name for the user session
+   * @returns {Promise<UserSession>} session
    */
-  async createSession(username) {
-    const response = await this.usersRepository.createSession(username);
-    const { id, name } = response.data;
-    return { id, name };
+  async createSession(userName) {
+    const response = await this.usersRepository.createSession(userName);
+    const { id, name, avatar } = response.data;
+    return { id, name, avatar };
   }
 
   /**
    * @param {string} sessionId ID of the session
-   * @returns {Promise<{ id: string, name: string} | null>} session
+   * @returns {Promise<UserSession | null>} session
    */
   async getSession(sessionId) {
     const response = await this.usersRepository.getSession(sessionId);
@@ -27,7 +28,16 @@ export class UsersController {
       return null;
     }
 
-    const { id, name } = response.data;
-    return { id, name };
+    return response.data;
+  }
+
+  /**
+   * @param {string} sessionID
+   * @param {string} assetID ID of the session
+   * @returns {Promise<UserSession>} session
+   */
+  async connectAvatarAsset(sessionID, assetID) {
+    const response = await this.usersRepository.connectAvatarAsset(sessionID, assetID);
+    return response.data;
   }
 }

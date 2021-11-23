@@ -1,15 +1,13 @@
-import React, { useContext } from 'react';
+// @ts-check
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { removeSession } from 'flux/actions';
+import { useUserStore } from 'flux/stores';
 import { arrowDown } from '../icons';
-import { AppContext } from '../store';
 import Avatar from './Avatar';
 
 export default function Header() {
-  const [app, actions] = useContext(AppContext);
-
-  const closeSession = () => {
-    actions.removeUser();
-  };
+  const { user } = useUserStore();
 
   return (
     <nav className="bg-transparent justify-content-around w-100 align-items-center navbar navbar-light bg-light">
@@ -17,14 +15,12 @@ export default function Header() {
         <img src={arrowDown} width="64" height="64" className="d-inline-block align-top mx-3" alt="" />
         Arcos Learning
       </a>
-      {app.scores.length > 0 ? (
-        <Link to={'/scores'} style={{ fontSize: 20, textShadow: '1px 1px rgb(84, 20, 20) 1px 1px' }} className="text-danger d-flex align-items-center navbar-brand pt-3 px-2">
-          Jugadas
-        </Link>
-      ) : null}
+      <Link to="/scores" style={{ fontSize: 20, textShadow: '1px 1px rgb(84, 20, 20) 1px 1px' }} className="text-danger d-flex align-items-center navbar-brand pt-3 px-2">
+        Jugadas
+      </Link>
 
-      {app.user ? (
-        <button onClick={closeSession} className="btn btn-danger">
+      {user && user.name ? (
+        <button onClick={removeSession} className="btn btn-danger">
           Cerrar sessi&oacute;n
         </button>
       ) : null}

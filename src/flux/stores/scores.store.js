@@ -5,7 +5,7 @@ import { devtools } from 'zustand/middleware';
 
 /** @type {ScoresStore} */
 const initialState = {
-  scores: {},
+  scores: [],
   loading: false
 };
 

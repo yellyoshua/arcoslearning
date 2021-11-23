@@ -5,6 +5,11 @@ export const GET_SESSION_BY_ID = gql`
     session(where: { id: $id }) {
       id
       name
+      avatar {
+        id
+        slug
+        url
+      }
     }
   }
 `;
