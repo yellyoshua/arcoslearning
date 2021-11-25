@@ -8,15 +8,35 @@ const quizzesController = new QuizzesController();
 /** @param {string} assignment */
 export const getQuestionsByAssignment = async (assignment) => {
 	try {
-		useQuizStore.setState({ loading: true });
+		useQuizStore.setState({
+			loading: true,
+			questions: [],
+			pages: 0,
+			currentPage: 0,
+			assignment,
+			qualification: 0,
+			start: null,
+		});
+
 		const questions = await quizzesController.getQuestionsByAssignment(
 			assignment
 		);
-		useQuizStore.setState((prev) => ({
+
+		return useQuizStore.setState({
 			questions,
 			loading: false,
 			pages: questions.length,
-			currentPage: prev.currentPage + 1,
-		}));
-	} catch (error) {}
+			currentPage: 0,
+		});
+	} catch (error) {
+		return useQuizStore.setState({
+			loading: false,
+			questions: [],
+			pages: 0,
+			currentPage: 0,
+			assignment: null,
+			qualification: 0,
+			start: null,
+		});
+	}
 };
