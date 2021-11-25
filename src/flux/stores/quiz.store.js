@@ -6,16 +6,18 @@ import { devtools } from 'zustand/middleware';
 /** @type {QuizStore} */
 const initialState = {
 	assignment: null,
+	qualification: 0,
 	pages: 0,
 	questions: [],
 	currentPage: 0,
-	start: null
+	start: null,
+	loading: false,
 };
 
 export const useQuizStore = createStore(
 	devtools(
 		() => ({
-			...initialState
+			...initialState,
 		}),
 		{ name: 'app-quiz-store' }
 	)

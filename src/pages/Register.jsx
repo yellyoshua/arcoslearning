@@ -31,7 +31,7 @@ const Register = () => {
 	}
 
 	if (user && user.name && user.avatar) {
-		return <Navigate to="/" />;
+		return <Navigate to='/' />;
 	}
 
 	if (user?.name && !user.avatar) {
@@ -40,24 +40,37 @@ const Register = () => {
 
 	return (
 		<Fragment>
-			<section className="container">
-				<div style={{ maxWidth: 500 }} className="container-fluid text-center">
-					<p className="init-greeting">Okey, comenzemos pero antes debo saber ¿Qui&eacute;n eres? ...</p>
-					<strong style={{ fontSize: 14 }} className="text-danger">
+			<section className='container'>
+				<div style={{ maxWidth: 500 }} className='container-fluid text-center'>
+					<p className='init-greeting'>
+						Okey, comenzemos pero antes debo saber ¿Qui&eacute;n eres? ...
+					</p>
+					<strong style={{ fontSize: 14 }} className='text-danger'>
 						(M&aacute;ximo 15 car&aacute;cteres)
 					</strong>
 				</div>
-				<form className="text-center col" onSubmit={registerPlayer}>
-					<input type="text" onChange={handlerNameInput} value={name} placeholder="Tu nombre" className="col-ms-6" autoComplete="off" />
-					<button type="submit" style={{ maxWidth: 200 }} className="col-ms-6 m-5 btn btn-danger">
+				<form className='text-center col' onSubmit={registerPlayer}>
+					<input
+						type='text'
+						onChange={handlerNameInput}
+						value={name}
+						placeholder='Tu nombre'
+						className='col-ms-6'
+						autoComplete='off'
+					/>
+					<button
+						type='submit'
+						style={{ maxWidth: 200 }}
+						className='col-ms-6 m-5 btn btn-danger'
+					>
 						Comenzar
 					</button>
 				</form>
 			</section>
-			<section className="footer container">
-				<blockquote className="blockquote text-center">
-					<footer className="blockquote-footer">
-						Por <cite title="Briggitte Arcos">Briggitte Arcos</cite>
+			<section className='footer container'>
+				<blockquote className='blockquote text-center'>
+					<footer className='blockquote-footer'>
+						Por <cite title='Briggitte Arcos'>Briggitte Arcos</cite>
 					</footer>
 				</blockquote>
 			</section>

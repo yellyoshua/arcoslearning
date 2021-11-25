@@ -14,7 +14,7 @@ export class QuizzesRepository {
 
 	async getQuizzesAssignments() {
 		const {
-			quizzes: { assignments = [] }
+			quizzes: { assignments = [] },
 		} = await this.api.request(queries.GET_QUIZZES_ASSIGNMENTS);
 
 		return { data: assignments };
@@ -22,7 +22,10 @@ export class QuizzesRepository {
 
 	/** @param {string} assignment */
 	async getQuestionsByAssignment(assignment) {
-		const { questions } = await this.api.request(queries.GET_QUESTIONS_BY_ASSIGNMENT, { assignment });
+		const { questions } = await this.api.request(
+			queries.GET_QUESTIONS_BY_ASSIGNMENT,
+			{ assignment }
+		);
 		return { data: questions };
 	}
 }

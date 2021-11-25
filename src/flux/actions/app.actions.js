@@ -5,11 +5,11 @@ import { useAppStore } from 'flux/stores';
 const appController = new AppController();
 
 export const getAvatarsAssets = async () => {
-  try {
-    useAppStore.setState({ loading: true });
-    const avatars = await appController.getAvatarsAssets();
-    return useAppStore.setState({ avatars, loading: false });
-  } catch (error) {
-    return useAppStore.setState({ loading: false });
-  }
+	try {
+		useAppStore.setState({ loading: true });
+		const avatars = await appController.getAvatarsAssets();
+		return useAppStore.setState({ avatars, loading: false });
+	} catch (error) {
+		return useAppStore.setState({ loading: false });
+	}
 };

@@ -5,12 +5,12 @@ import { devtools } from 'zustand/middleware';
 
 /** @type {ScoresStore} */
 const initialState = {
-  scores: [],
-  loading: false
+	scores: [],
+	loading: false,
 };
 
 export const useScoresStore = createStore(
-  devtools(() => ({
-    ...initialState
-  }))
+	devtools(() => ({
+		...initialState,
+	}))
 );

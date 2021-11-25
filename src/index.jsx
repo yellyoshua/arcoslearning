@@ -5,10 +5,10 @@ import AppContextProvider from 'store';
 import './index.css';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <AppContextProvider>
-      <RouterComponent />
-    </AppContextProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+	<React.StrictMode>
+		<AppContextProvider>
+			<RouterComponent />
+		</AppContextProvider>
+	</React.StrictMode>,
+	document.getElementById('root')
 );

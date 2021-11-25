@@ -33,6 +33,7 @@ export interface QuizStore {
 	qualification: number;
 	currentPage: number;
 	start: null | Date;
+	loading: boolean;
 }
 
 export interface AppStore {

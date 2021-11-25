@@ -3,15 +3,15 @@
 import { AppRepository } from '../repository';
 
 export class AppController {
-  constructor() {
-    this.appRepository = new AppRepository();
-  }
+	constructor() {
+		this.appRepository = new AppRepository();
+	}
 
-  /**
-   * @returns {Promise<Asset[]>} session
-   */
-  async getAvatarsAssets() {
-    const response = await this.appRepository.getAvatarsAssets();
-    return response.data;
-  }
+	/**
+	 * @returns {Promise<Asset[]>} session
+	 */
+	async getAvatarsAssets() {
+		const response = await this.appRepository.getAvatarsAssets();
+		return response.data;
+	}
 }

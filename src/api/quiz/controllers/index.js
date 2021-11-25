@@ -29,7 +29,9 @@ export class QuizzesController {
 	 * @returns {Promise<Question[]>} Questions
 	 */
 	async getQuestionsByAssignment(assignment) {
-		const response = await this.quizzesRepository.getQuestionsByAssignment(assignment);
+		const response = await this.quizzesRepository.getQuestionsByAssignment(
+			assignment
+		);
 		return response.data;
 	}
 }

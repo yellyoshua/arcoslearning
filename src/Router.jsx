@@ -17,11 +17,11 @@ export const RouterComponent = () => {
 		<BrowserRouter>
 			<Header />
 			<Routes>
-				<Route path="/">
+				<Route path='/'>
 					<Route index element={<Home />} />
 				</Route>
-				<Route path="/register" element={<Register />} />
-				<Route path="/scores" element={<Result />} />
+				<Route path='/register' element={<Register />} />
+				<Route path='/scores' element={<Result />} />
 			</Routes>
 		</BrowserRouter>
 	);
