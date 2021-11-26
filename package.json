@@ -26,7 +26,7 @@
 		"predeploy": "npm run build && echo https://arcoslearning.yoshualopez.ml > ./build/CNAME",
 		"deploy": "gh-pages -d build",
 		"test": "react-scripts test",
-		"e2e": "playwright test",
+		"e2e": "playwright test --config ./playwright.config.js",
 		"e2e:serve": "serve -s build -l 3000",
 		"eject": "react-scripts eject"
 	},
