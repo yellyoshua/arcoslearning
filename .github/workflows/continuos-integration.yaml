@@ -29,9 +29,7 @@ jobs:
         run: yarn install
 
       - name: Run e2e test's 🖥️
-        run: |
-          npx playwright install-deps
-          npm run e2e
+        run: npm run e2e
 
       - uses: actions/upload-artifact@v2
         if: ${{ always() }}
