@@ -8,7 +8,7 @@ const config = {
 	webServer: {
 		command: 'npm run e2e:serve',
 		port: 3000,
-		reuseExistingServer: true,
+		reuseExistingServer: !process.env.CI,
 	},
 	forbidOnly: !!process.env.CI,
 	retries: process.env.CI ? 2 : 0,
