@@ -10,7 +10,7 @@ const config = {
 		timeout: 120 * 1000,
 		reuseExistingServer: !process.env.CI,
 	},
-	reporter: [['html', { open: 'never', outputFolder: 'public/artifacts' }]],
+	reporter: [['html', { open: 'never', outputFolder: 'public/e2e-reporter' }]],
 	forbidOnly: !!process.env.CI,
 	retries: process.env.CI ? 2 : 0,
 	use: { trace: 'on' },
