@@ -1,56 +1,61 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 input {
-  border: 0;
-  border-radius: 10px;
-  outline: 0px;
-  padding: 5px 10px;
-  font-size: 16px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	border: 0;
+	border-radius: 10px;
+	outline: 0px;
+	padding: 5px 10px;
+	font-size: 16px;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
 }
 
 .init-greeting {
-  font-size: 20px;
-  text-align: center;
-  color: #20e0ff;
-  text-shadow: 1px 1px #7b8081;
+	font-size: 20px;
+	text-align: center;
+	color: #20e0ff;
+	text-shadow: 1px 1px #7b8081;
 }
 .App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
 }
 .game-cards-options {
-  cursor: pointer;
+	cursor: pointer;
 }
 .game-cards-options:hover {
-  width: 18rem;
-  background: steelblue;
+	width: 18rem;
+	background: steelblue;
 }
 .game-cards-options:hover * h3 {
-  color: white !important;
+	color: white !important;
 }
 .option-answer-select {
-  cursor: pointer;
-  border-radius: 20px;
-  background: #29295f;
-  color: #eee5e5;
+	cursor: pointer;
+	border-radius: 20px;
+	background: #29295f;
+	color: #eee5e5;
 }
 
 .option-answer-select:hover {
-  background: #498a40;
+	background: #498a40;
 }

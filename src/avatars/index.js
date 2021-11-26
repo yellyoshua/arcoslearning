@@ -10,8 +10,30 @@ import supermario from './icons8-super-mario-64.png';
 import walterwhite from './icons8-walter-white-64.png';
 
 const avatars = {
-  list: [fridakahlo, bender, homero, jake, frenchfries, soda, taco, scream, supermario, walterwhite],
-  object: { fridakahlo, bender, homero, jake, frenchfries, soda, taco, scream, supermario, walterwhite }
+	list: [
+		fridakahlo,
+		bender,
+		homero,
+		jake,
+		frenchfries,
+		soda,
+		taco,
+		scream,
+		supermario,
+		walterwhite,
+	],
+	object: {
+		fridakahlo,
+		bender,
+		homero,
+		jake,
+		frenchfries,
+		soda,
+		taco,
+		scream,
+		supermario,
+		walterwhite,
+	},
 };
 
 export default avatars;

@@ -1,41 +1,28 @@
-import React, { useContext } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { AppContext } from './store';
+// @ts-check
+import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { verifyUserSession } from 'flux/actions';
 import Header from './components/Header';
-import Register from './components/Register';
-import Home from './components/Home';
-import Result from './components/Result';
 
-function RouterComponent() {
-  const [app] = useContext(AppContext);
+import Home from './pages/Home';
+import Register from './pages/Register';
+import Result from './pages/Result';
 
-  return (
-    <Router>
-      <Header />
-      <Switch>
-        <Route
-          exact
-          path="/"
-          render={(props) => {
-            if (app.user && app.avatar) {
-              return <Home {...props} />;
-            }
-            return <Register {...props} />;
-          }}
-        />
-        <Route
-          exact
-          path="/scores"
-          render={(props) => {
-            if (app.scores) {
-              return <Result {...props} />;
-            }
-            return props.history.push('/');
-          }}
-        />
-      </Switch>
-    </Router>
-  );
-}
+export const RouterComponent = () => {
+	useEffect(() => {
+		verifyUserSession();
+	}, []);
 
-export default RouterComponent;
+	return (
+		<BrowserRouter>
+			<Header />
+			<Routes>
+				<Route path='/'>
+					<Route index element={<Home />} />
+				</Route>
+				<Route path='/register' element={<Register />} />
+				<Route path='/scores' element={<Result />} />
+			</Routes>
+		</BrowserRouter>
+	);
+};
