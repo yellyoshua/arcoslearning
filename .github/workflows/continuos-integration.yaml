@@ -24,9 +24,16 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '17.x'
+      - uses: microsoft/playwright-github-action@v1
 
       - name: Install dependencies 🖥️
         run: yarn install
 
       - name: Run e2e test's 🖥️
-        run: npx playwright test --config playwright.config.js
+        run: npm run e2e
+
+      - uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: test-artifacts
+          path: public/artifacts
