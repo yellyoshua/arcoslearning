@@ -26,4 +26,4 @@ jobs:
       - name: Install and run e2e test's 🖥️
         run: |
           yarn install
-          npx playwright test --config playwright.config.js --reporter=html
+          npx playwright test --config playwright.config.js
