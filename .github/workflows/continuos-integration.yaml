@@ -1,0 +1,20 @@
+name: Build and run test's 🤖
+on:
+  push:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install and run test's 🪲
+        run: |
+          yarn install
+          yarn run test
+  e2e:
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+    steps:
+      - name: Install and run e2e test's 🖥️
+        run: |
+          yarn install
+          yarn run e2e

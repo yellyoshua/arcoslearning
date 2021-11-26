@@ -7,6 +7,7 @@ module.exports = {
 		'<rootDir>/public/',
 		'<rootDir>/node_modules/',
 		'<rootDir>/dist/',
+		'<rootDir>/e2e/',
 	],
 	setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
 };
