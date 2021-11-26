@@ -5,7 +5,6 @@ const { devices } = require('@playwright/test');
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
 	testDir: 'e2e',
-	reporter: 'html',
 	webServer: {
 		command: 'npm run e2e:serve',
 		port: 3000,
