@@ -23,5 +23,6 @@ jobs:
       - name: Install and run e2e test's 🖥️
         run: |
           yarn install
+          npx playwright install
           npx playwright install-deps
           yarn run e2e
