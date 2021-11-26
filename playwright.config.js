@@ -6,8 +6,9 @@ const { devices } = require('@playwright/test');
 const config = {
 	testDir: 'e2e',
 	webServer: {
-		command: 'npm run e2e:serve',
+		command: 'npm start',
 		port: 3000,
+		timeout: 60000,
 		reuseExistingServer: !process.env.CI,
 	},
 	forbidOnly: !!process.env.CI,
