@@ -42,6 +42,9 @@ jobs:
         with:
           node-version: '16.13.0'
 
+      - name: Install dependencies
+        run: yarn install
+
       - name: Create e2e reporter 🖥️
         run: npm run e2e
 
@@ -51,10 +54,8 @@ jobs:
           name: test-artifacts
           path: public/e2e-reporter/
 
-      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
-        run: |
-          yarn install
-          yarn run predeploy
+      - name: Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+        run: yarn run predeploy
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.5
