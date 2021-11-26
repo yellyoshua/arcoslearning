@@ -11,8 +11,8 @@ jobs:
 
       - name: Install and run test's 🪲
         run: |
-          yarn install
-          yarn run test
+          npm install
+          npm run test
   e2e:
     runs-on: ubuntu-latest
     env:
@@ -25,5 +25,5 @@ jobs:
 
       - name: Install and run e2e test's 🖥️
         run: |
-          yarn install
+          npm install
           npx playwright test --config playwright.config.js
