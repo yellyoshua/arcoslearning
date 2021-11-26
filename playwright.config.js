@@ -5,6 +5,7 @@ const { devices } = require('@playwright/test');
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
 	testDir: 'e2e',
+	reporter: 'html',
 	webServer: {
 		command: 'npm run e2e:serve',
 		port: 3000,
@@ -15,20 +16,6 @@ const config = {
 	use: {
 		trace: 'on-first-retry',
 	},
-	projects: [
-		{
-			name: 'chromium',
-			use: { ...devices['Desktop Chrome'] },
-		},
-		{
-			name: 'firefox',
-			use: { ...devices['Desktop Firefox'] },
-		},
-		{
-			name: 'webkit',
-			use: { ...devices['Desktop Safari'] },
-		},
-	],
 };
 
 module.exports = config;
