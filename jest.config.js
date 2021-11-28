@@ -1,7 +1,9 @@
+// @ts-check
 // In your own jest-setup.js (or any other name)
 
 // In jest.config.js add (if you haven't already)
 module.exports = {
+	roots: ['<rootDir>/src'],
 	testEnvironment: 'jsdom',
 	testPathIgnorePatterns: [
 		'<rootDir>/public/',
@@ -9,5 +11,5 @@ module.exports = {
 		'<rootDir>/dist/',
 		'<rootDir>/e2e/',
 	],
-	setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
+	setupFilesAfterEnv: ['<rootDir>/jest-setup.js'],
 };

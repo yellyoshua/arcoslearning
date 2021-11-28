@@ -6,24 +6,24 @@ import { useUserStore } from 'flux/stores';
 import { AvatarPicker } from 'components/AvatarPicker';
 
 const Register = () => {
-	const { loading, user } = useUserStore();
+	const { loading, user } = useUserStore((state) => ({
+		loading: state.loading,
+		user: state.user,
+	}));
+	const [canSubmit, setCanSubmit] = useState(false);
 	const [name, setName] = useState('');
 
 	/** @param {React.ChangeEvent<HTMLFormElement>} event */
 	const registerPlayer = (event) => {
 		event.preventDefault();
-		createUserSession(name);
+		name.length >= 3 && createUserSession(name);
 	};
 
 	/** @param {React.ChangeEvent<HTMLInputElement>} event */
 	const handlerNameInput = (event) => {
 		const name = event.target.value;
-
-		if (name.length >= 15) {
-			setName(name.slice(0, 15));
-		} else {
-			setName(name);
-		}
+		name.length >= 3 ? setCanSubmit(true) : setCanSubmit(false);
+		setName(name.slice(0, 15));
 	};
 
 	if (loading) {
@@ -43,10 +43,11 @@ const Register = () => {
 			<section className='container'>
 				<div style={{ maxWidth: 500 }} className='container-fluid text-center'>
 					<p className='init-greeting'>
-						Okey, comenzemos pero antes debo saber ¿Qui&eacute;n eres? ...
+						Okey, comenzemos pero antes debo saber...
+						<br /> ¿Qui&eacute;n eres?
 					</p>
 					<strong style={{ fontSize: 14 }} className='text-danger'>
-						(M&aacute;ximo 15 car&aacute;cteres)
+						(De 3 a 15 car&aacute;cteres)
 					</strong>
 				</div>
 				<form className='text-center col' onSubmit={registerPlayer}>
@@ -60,6 +61,7 @@ const Register = () => {
 					/>
 					<button
 						type='submit'
+						disabled={!canSubmit}
 						style={{ maxWidth: 200 }}
 						className='col-ms-6 m-5 btn btn-danger'
 					>
