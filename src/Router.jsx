@@ -15,12 +15,6 @@ const PrivateHome = () => (
 	</Authentication>
 );
 
-const PrivateRegister = () => (
-	<Authentication>
-		<Register />
-	</Authentication>
-);
-
 export const RouterComponent = () => {
 	useEffect(() => {
 		verifyUserSession();
@@ -33,7 +27,7 @@ export const RouterComponent = () => {
 				<Route path='/'>
 					<Route index element={<PrivateHome />} />
 				</Route>
-				<Route path='/register' element={<PrivateRegister />} />
+				<Route path='/register' element={<Register />} />
 				<Route path='/scores' element={<Result />} />
 			</Routes>
 		</BrowserRouter>
