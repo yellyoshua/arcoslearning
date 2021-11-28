@@ -17,3 +17,6 @@ export const useAppStore = createStore(
 		{ name: 'app-store' }
 	)
 );
+
+process.env.NODE_ENV === 'development' &&
+	useAppStore.subscribe((app) => console.log({ app }));

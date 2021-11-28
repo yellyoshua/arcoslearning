@@ -34,6 +34,16 @@ export interface QuizStore {
 	currentPage: number;
 	start: null | Date;
 	loading: boolean;
+	done: boolean;
+}
+
+export interface Assignment {
+	name: string;
+}
+
+export interface AssignmentStore {
+	assignments: Assignment[];
+	loading: boolean;
 }
 
 export interface AppStore {

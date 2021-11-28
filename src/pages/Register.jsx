@@ -6,10 +6,7 @@ import { useUserStore } from 'flux/stores';
 import { AvatarPicker } from 'components/AvatarPicker';
 
 const Register = () => {
-	const { loading, user } = useUserStore((state) => ({
-		loading: state.loading,
-		user: state.user,
-	}));
+	const { loading, user } = useUserStore();
 	const [canSubmit, setCanSubmit] = useState(false);
 	const [name, setName] = useState('');
 
@@ -68,13 +65,6 @@ const Register = () => {
 						Comenzar
 					</button>
 				</form>
-			</section>
-			<section className='footer container'>
-				<blockquote className='blockquote text-center'>
-					<footer className='blockquote-footer'>
-						Por <cite title='Briggitte Arcos'>Briggitte Arcos</cite>
-					</footer>
-				</blockquote>
 			</section>
 		</Fragment>
 	);

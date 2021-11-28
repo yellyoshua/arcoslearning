@@ -6,7 +6,7 @@ import { persist, devtools } from 'zustand/middleware';
 /** @type {UserStore} */
 const initialState = {
 	user: null,
-	loading: false,
+	loading: true,
 };
 
 export const useUserStore = createStore(
@@ -24,3 +24,6 @@ export const useUserStore = createStore(
 		{ name: 'app-user-store' }
 	)
 );
+
+process.env.NODE_ENV === 'development' &&
+	useUserStore.subscribe((user) => console.log({ user }));

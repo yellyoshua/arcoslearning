@@ -14,3 +14,6 @@ export const useScoresStore = createStore(
 		...initialState,
 	}))
 );
+
+process.env.NODE_ENV === 'development' &&
+	useScoresStore.subscribe((scores) => console.log({ scores }));
