@@ -31,7 +31,6 @@ export const getQuestionsByAssignment = async (assignment) => {
 			done: false,
 		});
 	} catch (error) {
-		console.error(error);
 		return useQuizStore.setState({
 			loading: false,
 			questions: [],
