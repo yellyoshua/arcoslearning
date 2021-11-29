@@ -6,7 +6,7 @@ import { useUserStore } from 'flux/stores';
 import { AvatarPicker } from 'components/AvatarPicker';
 
 const Register = () => {
-	const { user } = useUserStore();
+	const { user, loading } = useUserStore();
 	const [canSubmit, setCanSubmit] = useState(false);
 	const [name, setName] = useState('');
 
@@ -22,6 +22,10 @@ const Register = () => {
 		name.length >= 3 ? setCanSubmit(true) : setCanSubmit(false);
 		setName(name.slice(0, 15));
 	};
+
+	if (loading) {
+		return <p>Loading...</p>;
+	}
 
 	if (user && user.name && user.avatar) {
 		return <Navigate to='/' />;

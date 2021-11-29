@@ -1,6 +1,6 @@
 // @ts-check
-import { qualifyAnswerAndNext } from 'flux/actions';
 import React from 'react';
+import { qualifyAnswerAndNext } from 'flux/actions';
 
 /** @param {{ question: import('types').Question, answerIndex: number }} props */
 export const QuizQuestion = ({ question, answerIndex }) => {

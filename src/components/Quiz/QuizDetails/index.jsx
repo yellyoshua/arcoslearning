@@ -1,6 +1,6 @@
 // @ts-check
-import { useQuizStore } from 'flux/stores';
 import React from 'react';
+import { useQuizStore } from 'flux/stores';
 
 export const QuizDetails = () => {
 	const { assignment, pages } = useQuizStore();
