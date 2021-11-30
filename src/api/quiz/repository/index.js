@@ -1,6 +1,7 @@
 // @ts-check
 import { GetGraphqlClient } from '../../config';
 import * as queries from './graphql-queries';
+import * as mutations from './graphql-mutations';
 
 export class QuizzesRepository {
 	constructor() {
@@ -27,5 +28,23 @@ export class QuizzesRepository {
 			{ assignmentID }
 		);
 		return { data: questions };
+	}
+
+	/**
+	 * @param {string} user
+	 * @param {string} assignment
+	 * @param {number} qualification
+	 */
+	async createScore(user, assignment, qualification) {
+		const { createScore } = await this.api.request(mutations.CREATE_SCORE, {
+			user,
+			assignment,
+			qualification,
+		});
+
+		const score = createScore.id;
+		await this.api.request(mutations.PUBLISH_SCORE, { score });
+
+		return { data: createScore };
 	}
 }

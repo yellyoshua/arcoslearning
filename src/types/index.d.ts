@@ -16,7 +16,7 @@ export interface UserStore {
 
 export interface Score {
 	qualification: number;
-	quiz: string;
+	assignment: Assignment;
 	user: UserSession;
 }
 

@@ -45,15 +45,9 @@ const Results = () => {
 										/>
 									</th>
 									<td>{score.user.name}</td>
-									<td>{score.quiz}</td>
+									<td>{score.assignment.name}</td>
 									<td className='d-flex justify-content-center align-items-center'>
 										<p>{score.qualification}/100</p>
-										<p
-											className='text-white'
-											style={{ padding: '0px 10px', borderRadius: '50%' }}
-										>
-											{score.score}
-										</p>
 									</td>
 								</tr>
 							);

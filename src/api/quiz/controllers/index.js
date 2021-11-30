@@ -35,4 +35,22 @@ export class QuizzesController {
 		);
 		return response.data;
 	}
+
+	/**
+	 * @param {string} user
+	 * @param {string} assignment
+	 * @param {number} qualification
+	 * @returns {Promise<{ user: string; assignment: string; score: string; qualification: number }>}
+	 */
+	async createScore(user, assignment, qualification) {
+		const response = await this.quizzesRepository.createScore(
+			user,
+			assignment,
+			qualification
+		);
+
+		const score = response.data.id;
+
+		return { user, score, assignment, qualification };
+	}
 }
