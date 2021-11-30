@@ -56,6 +56,6 @@ code {
 	color: #eee5e5;
 }
 
-.option-answer-select:hover {
+.option-answer-select:active {
 	background: #498a40;
 }

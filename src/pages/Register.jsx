@@ -6,10 +6,7 @@ import { useUserStore } from 'flux/stores';
 import { AvatarPicker } from 'components/AvatarPicker';
 
 const Register = () => {
-	const { loading, user } = useUserStore((state) => ({
-		loading: state.loading,
-		user: state.user,
-	}));
+	const { user, loading } = useUserStore();
 	const [canSubmit, setCanSubmit] = useState(false);
 	const [name, setName] = useState('');
 

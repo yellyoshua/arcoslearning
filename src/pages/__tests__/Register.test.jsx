@@ -4,6 +4,9 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { createUserSession } from 'flux/actions';
 import Register from 'pages/Register';
+import { useUserStore } from 'flux/stores';
+
+const initialState = useUserStore.getState();
 
 jest.mock('flux/actions', () => ({
 	createUserSession: jest.fn(),
@@ -13,6 +16,7 @@ describe('Register page', () => {
 	beforeEach(() => {
 		// @ts-ignore
 		createUserSession.mockClear();
+		useUserStore.setState({ ...initialState, loading: false }, true);
 	});
 
 	it('should input enable button', () => {

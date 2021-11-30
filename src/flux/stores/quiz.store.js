@@ -1,9 +1,8 @@
 // @ts-check
-/** @typedef {import("types").QuizStore} QuizStore */
 import createStore from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-/** @type {QuizStore} */
+/** @type {import("types").QuizStore} */
 const initialState = {
 	assignment: null,
 	qualification: 0,
@@ -12,6 +11,7 @@ const initialState = {
 	currentPage: 0,
 	start: null,
 	loading: false,
+	done: false,
 };
 
 export const useQuizStore = createStore(
@@ -22,3 +22,6 @@ export const useQuizStore = createStore(
 		{ name: 'app-quiz-store' }
 	)
 );
+
+process.env.NODE_ENV === 'development' &&
+	useQuizStore.subscribe((quiz) => console.log({ quiz }));

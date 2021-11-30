@@ -31,6 +31,7 @@ export const GET_QUIZZES_ASSIGNMENTS = gql`
 export const GET_QUESTIONS_BY_ASSIGNMENT = gql`
 	query GetQuestionsByAssignment($assignment: Quizzes!) {
 		questions: quizzes(where: { assignment: $assignment }) {
+			id
 			assignment
 			question
 			options

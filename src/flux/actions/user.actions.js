@@ -21,12 +21,9 @@ export const removeSession = () => {
 export const verifyUserSession = async () => {
 	try {
 		const localSession = useUserStore.getState().user?.id;
-		useUserStore.setState({ loading: true });
 
 		if (localSession) {
 			const session = await usersController.getSession(localSession);
-
-			console.log({ session });
 
 			if (session) {
 				return useUserStore.setState({

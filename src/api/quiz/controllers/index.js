@@ -1,6 +1,7 @@
 // @ts-check
 /** @typedef {import("types").Score} Score */
 /** @typedef {import("types").Question} Question */
+/** @typedef {import("types").Assignment} Assignment */
 import { QuizzesRepository } from '../repository';
 
 export class QuizzesController {
@@ -17,7 +18,7 @@ export class QuizzesController {
 	}
 
 	/**
-	 * @returns {Promise<{ name: string }[]>} Quizzes (Enumerations)
+	 * @returns {Promise<Assignment[]>} Quizzes (Enumerations)
 	 */
 	async getQuizzesAssignments() {
 		const response = await this.quizzesRepository.getQuizzesAssignments();
