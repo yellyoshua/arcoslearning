@@ -2,7 +2,7 @@
 import React from 'react';
 import { qualifyAnswerAndNext } from 'flux/actions';
 
-/** @param {{ question: import('types').Question, answerIndex: number }} props */
+/** @param {{ question: import('types').Quiz, answerIndex: number }} props */
 export const QuizQuestion = ({ question, answerIndex }) => {
 	/**
 	 * @param {number} optionIndex

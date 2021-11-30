@@ -8,23 +8,23 @@ export class QuizzesRepository {
 	}
 
 	async getQuizScores() {
-		const { quizScores } = await this.api.request(queries.GET_QUIZ_SCORES);
-		return { data: quizScores };
+		const { scores } = await this.api.request(queries.GET_QUIZ_SCORES);
+		return { data: scores };
 	}
 
 	async getQuizzesAssignments() {
-		const {
-			quizzes: { assignments = [] },
-		} = await this.api.request(queries.GET_QUIZZES_ASSIGNMENTS);
+		const { assignments } = await this.api.request(
+			queries.GET_QUIZZES_ASSIGNMENTS
+		);
 
 		return { data: assignments };
 	}
 
-	/** @param {string} assignment */
-	async getQuestionsByAssignment(assignment) {
+	/** @param {string} assignmentID */
+	async getQuestionsByAssignment(assignmentID) {
 		const { questions } = await this.api.request(
 			queries.GET_QUESTIONS_BY_ASSIGNMENT,
-			{ assignment }
+			{ assignmentID }
 		);
 		return { data: questions };
 	}

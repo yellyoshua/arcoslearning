@@ -16,10 +16,10 @@ describe('QuizQuestion tests', () => {
 	});
 
 	it('should render the question content', () => {
-		/** @type {import('types').Question} */
+		/** @type {import('types').Quiz} */
 		const question = {
 			id: 'random-id',
-			assignment: 'Wathever',
+			assignment: { id: 'wathever-id', name: 'Wathever' },
 			question: 'what is number five?',
 			options: ['5', '4', '3'],
 			answerIndex: 1,
@@ -34,10 +34,10 @@ describe('QuizQuestion tests', () => {
 	});
 
 	it('should able click a question option', () => {
-		/** @type {import('types').Question} */
+		/** @type {import('types').Quiz} */
 		const question = {
 			id: 'random-id',
-			assignment: 'Wathever',
+			assignment: { id: 'wathever-id', name: 'Wathever' },
 			question: 'what is number five?',
 			options: ['5', '4', '3'],
 			answerIndex: 1,

@@ -5,7 +5,7 @@ import { useQuizStore } from 'flux/stores';
 
 const quizzesController = new QuizzesController();
 
-/** @param {string} assignment */
+/** @param {import('types').Assignment} assignment */
 export const getQuestionsByAssignment = async (assignment) => {
 	try {
 		useQuizStore.setState({
@@ -20,7 +20,7 @@ export const getQuestionsByAssignment = async (assignment) => {
 		});
 
 		const questions = await quizzesController.getQuestionsByAssignment(
-			assignment
+			assignment.id
 		);
 
 		return useQuizStore.setState({
@@ -73,7 +73,7 @@ export const finalizeQuiz = (qualification) => {
 	// in the api validate (userId and assignment)
 	// if can update or create a new
 
-	useQuizStore.setState({ loading: true });
+	useQuizStore.setState({ loading: false });
 };
 
 /**

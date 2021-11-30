@@ -13,7 +13,10 @@ describe('QuizDetails tests', () => {
 	});
 
 	it('should show details of the quiz', () => {
-		useQuizStore.setState({ assignment: 'Matematica', pages: 10 });
+		useQuizStore.setState({
+			assignment: { id: 'random-id', name: 'Matematica' },
+			pages: 10,
+		});
 
 		render(<QuizDetails />);
 

@@ -6,7 +6,7 @@ import { getAssignments, getQuestionsByAssignment } from 'flux/actions';
 export const AssignmentPicker = () => {
 	const { assignments, loading } = useAsignmentStore();
 
-	/** @param {string} assignment */
+	/** @param {import('types').Assignment} assignment */
 	const selectAssignmentHandler = (assignment) => {
 		getQuestionsByAssignment(assignment);
 	};
@@ -26,16 +26,17 @@ export const AssignmentPicker = () => {
 			</div>
 			<div className='row justify-content-center'>
 				{assignments.map((assignment, key) => (
-					<div
+					<button
 						key={`${key}-${assignment.name}`}
-						onClick={() => selectAssignmentHandler(assignment.name)}
+						disabled={assignment.quizzes?.length === 0}
+						onClick={() => selectAssignmentHandler(assignment)}
 						className='game-cards-options card m-3'
 						style={{ width: '18rem' }}
 					>
-						<div className='card-body text-center'>
+						<div className='card-body text-center m-auto'>
 							<h3 className='card-text text-danger'>{assignment.name}</h3>
 						</div>
-					</div>
+					</button>
 				))}
 			</div>
 		</section>
