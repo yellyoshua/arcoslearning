@@ -11,7 +11,7 @@ import {
 
 const sampleQuestion = {
 	id: 'sample-question-id',
-	assignment: 'Matematica',
+	assignment: { id: 'random-id', name: 'Matematica' },
 	question: 'this is a question',
 	options: ['a', 'b'],
 	answerIndex: 1,
@@ -32,16 +32,19 @@ describe('quiz dispatch actions', () => {
 		it('should pass and set questions to the state', async () => {
 			// @ts-ignore
 			QuizzesController.prototype.getQuestionsByAssignment.mockImplementation(
-				/** @param {string} assignment */
+				/** @param {import('types').Assignment} assignment */
 				(assignment) =>
 					Promise.resolve([sampleQuestion].map((q) => ({ ...q, assignment })))
 			);
 
-			await getQuestionsByAssignment('Quimica');
+			await getQuestionsByAssignment({ id: 'Quimica', name: 'Quimica' });
 
 			const currentState = useQuizStore.getState();
 
-			expect(currentState.assignment).toBe('Quimica');
+			expect(currentState.assignment).toEqual({
+				id: 'Quimica',
+				name: 'Quimica',
+			});
 			expect(currentState.start).toBeNull();
 			expect(currentState.pages).toBe(1);
 			expect(currentState.currentPage).toBe(0);
@@ -63,7 +66,7 @@ describe('quiz dispatch actions', () => {
 			);
 
 			try {
-				await getQuestionsByAssignment('Fisica');
+				await getQuestionsByAssignment({ id: 'Fisica', name: 'Fisica' });
 			} catch (error) {}
 
 			const currentState = useQuizStore.getState();
@@ -93,7 +96,7 @@ describe('quiz dispatch actions', () => {
 						id: 'sample-id',
 						question: 'Sample question',
 						answerIndex: 1,
-						assignment: 'MATEMATICA',
+						assignment: { id: 'random-id', name: 'MATEMATICA' },
 						options: [],
 					},
 				],

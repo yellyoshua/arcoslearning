@@ -4,12 +4,14 @@
 	"private": true,
 	"homepage": "https://arcoslearning.yoshualopez.ml/",
 	"dependencies": {
+		"dayjs": "^1.10.7",
 		"graphql": "^16.0.1",
 		"graphql-request": "^3.6.1",
 		"react": "^17.0.1",
 		"react-dom": "^17.0.1",
 		"react-router-dom": "6",
 		"react-scripts": "^4.0.3",
+		"react-toastify": "^8.1.0",
 		"zustand": "^3.6.5"
 	},
 	"devDependencies": {

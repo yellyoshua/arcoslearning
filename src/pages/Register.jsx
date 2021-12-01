@@ -4,16 +4,27 @@ import { Navigate } from 'react-router-dom';
 import { createUserSession } from 'flux/actions';
 import { useUserStore } from 'flux/stores';
 import { AvatarPicker } from 'components/AvatarPicker';
+import { useToast } from 'hooks/useToast';
 
 const Register = () => {
 	const { user, loading } = useUserStore();
 	const [canSubmit, setCanSubmit] = useState(false);
 	const [name, setName] = useState('');
 
+	const { fireToastPromise } = useToast();
+
 	/** @param {React.ChangeEvent<HTMLFormElement>} event */
-	const registerPlayer = (event) => {
+	const registerPlayer = async (event) => {
 		event.preventDefault();
-		name.length >= 3 && createUserSession(name);
+		if (name.length >= 3) {
+			try {
+				await fireToastPromise(createUserSession(name), {
+					pending: 'Validando sesion',
+					error: 'Ah ocurrido un error',
+					success: `Bienvenido, ${name}`,
+				});
+			} catch (error) {}
+		}
 	};
 
 	/** @param {React.ChangeEvent<HTMLInputElement>} event */

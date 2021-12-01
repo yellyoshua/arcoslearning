@@ -1,11 +1,11 @@
 // @ts-check
 
 import { QuizzesController } from 'api/quiz/controllers';
-import { useQuizStore } from 'flux/stores';
+import { useQuizStore, useUserStore } from 'flux/stores';
 
 const quizzesController = new QuizzesController();
 
-/** @param {string} assignment */
+/** @param {import('types').Assignment} assignment */
 export const getQuestionsByAssignment = async (assignment) => {
 	try {
 		useQuizStore.setState({
@@ -20,7 +20,7 @@ export const getQuestionsByAssignment = async (assignment) => {
 		});
 
 		const questions = await quizzesController.getQuestionsByAssignment(
-			assignment
+			assignment.id
 		);
 
 		return useQuizStore.setState({
@@ -62,18 +62,27 @@ export const initiateQuiz = () => {
 };
 
 /** @param {number} qualification */
-export const finalizeQuiz = (qualification) => {
+export const finalizeQuiz = async (qualification) => {
 	useQuizStore.setState({
 		qualification: Math.round(qualification),
 		loading: true,
 		done: true,
 	});
 
-	// TODO: upload the quiz results
-	// in the api validate (userId and assignment)
-	// if can update or create a new
+	const user = useUserStore.getState().user;
+	const quiz = useQuizStore.getState();
 
-	useQuizStore.setState({ loading: true });
+	if (user && quiz.assignment) {
+		try {
+			await quizzesController.createScore(
+				user.id,
+				quiz.assignment.id,
+				quiz.qualification
+			);
+		} catch (error) {}
+	}
+
+	useQuizStore.setState({ loading: false });
 };
 
 /**

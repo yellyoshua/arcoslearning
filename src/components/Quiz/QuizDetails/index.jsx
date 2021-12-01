@@ -9,7 +9,7 @@ export const QuizDetails = () => {
 		<div className='row justify-content-center'>
 			<div className='card m-3' style={{ width: '18rem' }}>
 				<div className='card-body text-center'>
-					<h3 className='card-text text-danger'>{assignment}</h3>
+					<h3 className='card-text text-danger'>{assignment?.name}</h3>
 					<h6 className='card-text text-danger'>{pages} preguntas</h6>
 				</div>
 			</div>

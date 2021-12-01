@@ -6,8 +6,8 @@ export interface Asset {
 
 export interface UserSession {
 	id: string;
-	avatar: Asset | null;
 	name: string;
+	avatar: Asset | null;
 }
 export interface UserStore {
 	user: UserSession | null;
@@ -15,9 +15,9 @@ export interface UserStore {
 }
 
 export interface Score {
-	score: string;
+	updatedAt: string;
 	qualification: number;
-	quiz: string;
+	assignment: Assignment;
 	user: UserSession;
 }
 
@@ -28,8 +28,8 @@ export interface ScoresStore {
 
 export interface QuizStore {
 	pages: number;
-	assignment: null | string;
-	questions: Question[];
+	assignment: null | Assignment;
+	questions: Quiz[];
 	qualification: number;
 	currentPage: number;
 	start: null | Date;
@@ -38,7 +38,9 @@ export interface QuizStore {
 }
 
 export interface Assignment {
+	id: string;
 	name: string;
+	quizzes?: Quiz[];
 }
 
 export interface AssignmentStore {
@@ -51,9 +53,9 @@ export interface AppStore {
 	loading: boolean;
 }
 
-export interface Question {
+export interface Quiz {
 	id: string;
-	assignment: string;
+	assignment: Assignment;
 	question: string;
 	options: string[];
 	answerIndex: number;
