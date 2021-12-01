@@ -24,6 +24,9 @@ const ResultContent = ({ score }) => {
 			<td className='text-right' style={{ color }}>
 				{qualification}/100 {value}
 			</td>
+			<td className='text-right' style={{ textTransform: 'capitalize' }}>
+				{score.updatedAt}
+			</td>
 		</tr>
 	);
 };

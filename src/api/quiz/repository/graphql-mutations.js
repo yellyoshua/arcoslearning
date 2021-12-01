@@ -29,3 +29,22 @@ export const PUBLISH_SCORE = gql`
 		}
 	}
 `;
+
+export const UPDATE_SCORE = gql`
+	mutation UpdateScore($score: ID!, $qualification: Int!) {
+		updateScore(
+			where: { id: $score }
+			data: { qualification: $qualification }
+		) {
+			...scoreFields
+		}
+	}
+
+	fragment scoreFields on Score {
+		id
+		qualification
+		assignment {
+			name
+		}
+	}
+`;

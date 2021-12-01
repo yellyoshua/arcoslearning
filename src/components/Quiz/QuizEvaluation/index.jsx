@@ -2,7 +2,6 @@
 import React from 'react';
 import shallow from 'zustand/shallow';
 import { useQuizStore } from 'flux/stores';
-import { QuizTiming } from 'components/QuizTiming';
 import { QuizQuestion } from '../QuizQuestion';
 import { QuizResults } from '../QuizResults';
 
@@ -26,7 +25,6 @@ export const QuizEvaluation = () => {
 				question={questions[currentPage]}
 				answerIndex={questions[currentPage].answerIndex}
 			/>
-			<QuizTiming />
 		</div>
 	);
 };

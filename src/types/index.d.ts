@@ -15,6 +15,7 @@ export interface UserStore {
 }
 
 export interface Score {
+	updatedAt: string;
 	qualification: number;
 	assignment: Assignment;
 	user: UserSession;

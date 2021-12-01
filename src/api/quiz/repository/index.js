@@ -36,6 +36,24 @@ export class QuizzesRepository {
 	 * @param {number} qualification
 	 */
 	async createScore(user, assignment, qualification) {
+		const { scores } = await this.api.request(queries.SEARCH_PREV_SCORES, {
+			user,
+			assignment,
+		});
+
+		if (scores.length > 0) {
+			const score = scores[0].id;
+
+			const { updateScore } = await this.api.request(mutations.UPDATE_SCORE, {
+				score,
+				qualification,
+			});
+
+			await this.api.request(mutations.PUBLISH_SCORE, { score });
+
+			return { data: updateScore };
+		}
+
 		const { createScore } = await this.api.request(mutations.CREATE_SCORE, {
 			user,
 			assignment,

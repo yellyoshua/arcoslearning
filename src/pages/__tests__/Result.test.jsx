@@ -59,8 +59,11 @@ describe('Result page', () => {
 				scores: [
 					{
 						qualification: 100,
-						quiz: 'Matematica',
-						score: 'A',
+						assignment: {
+							id: 'random-id',
+							name: 'Matematica',
+						},
+						updatedAt: 'Nov 30, 2021 11:50 PM',
 						user: {
 							name: 'Sample user',
 							avatar: null,
@@ -73,7 +76,7 @@ describe('Result page', () => {
 
 		expect(screen.getByText('Sample user')).toBeInTheDocument();
 		expect(screen.getByText('Matematica')).toBeInTheDocument();
-		expect(screen.getByText('100/100')).toBeInTheDocument();
+		expect(screen.getByText('100/100 A')).toBeInTheDocument();
 		expect(useScoresStore.getState().scores.length).toBe(1);
 		// @ts-ignore
 		expect(getQuizzesScores.mock.calls.length).toBe(1);

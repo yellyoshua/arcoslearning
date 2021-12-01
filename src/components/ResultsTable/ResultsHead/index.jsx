@@ -15,6 +15,9 @@ export const ResultsHead = () => {
 				<th scope='col' className='text-right'>
 					Calificaci&oacute;n
 				</th>
+				<th scope='col' className='text-right'>
+					Fecha
+				</th>
 			</tr>
 		</thead>
 	);

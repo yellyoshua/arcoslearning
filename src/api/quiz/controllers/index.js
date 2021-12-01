@@ -2,6 +2,7 @@
 /** @typedef {import("types").Score} Score */
 /** @typedef {import("types").Quiz} Quiz */
 /** @typedef {import("types").Assignment} Assignment */
+import dayjs from 'dayjs';
 import { QuizzesRepository } from '../repository';
 
 export class QuizzesController {
@@ -14,7 +15,14 @@ export class QuizzesController {
 	 */
 	async getQuizScores() {
 		const response = await this.quizzesRepository.getQuizScores();
-		return response.data;
+
+		/** @type {Score[]} */
+		const scores = response.data;
+
+		return scores.map((score) => {
+			const updatedAt = dayjs(score.updatedAt).format('MMM D, YYYY h:mm A');
+			return { ...score, updatedAt };
+		});
 	}
 
 	/**

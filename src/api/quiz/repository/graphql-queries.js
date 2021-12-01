@@ -2,7 +2,7 @@ import { gql } from 'graphql-request';
 
 export const GET_QUIZ_SCORES = gql`
 	query {
-		scores {
+		scores(orderBy: updatedAt_DESC) {
 			...scoreFields
 		}
 	}
@@ -15,6 +15,7 @@ export const GET_QUIZ_SCORES = gql`
 		user {
 			...userFields
 		}
+		updatedAt
 	}
 
 	fragment userFields on Session {
@@ -60,5 +61,17 @@ export const GET_QUESTIONS_BY_ASSIGNMENT = gql`
 		question
 		options
 		answerIndex
+	}
+`;
+
+export const SEARCH_PREV_SCORES = gql`
+	query SearchPrevScore($user: ID!, $assignment: ID!) {
+		scores(where: { user: { id: $user }, assignment: { id: $assignment } }) {
+			...scoreFields
+		}
+	}
+
+	fragment scoreFields on Score {
+		id
 	}
 `;
