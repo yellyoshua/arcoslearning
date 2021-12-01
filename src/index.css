@@ -59,3 +59,15 @@ code {
 .option-answer-select:active {
 	background: #498a40;
 }
+
+.avatar-result {
+	width: 50px;
+	height: 50px;
+}
+
+@media (max-width: 530px) {
+	.avatar-result {
+		width: 30px;
+		height: 30px;
+	}
+}
