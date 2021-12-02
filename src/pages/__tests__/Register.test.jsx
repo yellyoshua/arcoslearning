@@ -25,7 +25,7 @@ describe('Register page', () => {
 		expect(screen.getByText('Comenzar').closest('button')).toBeDisabled();
 
 		fireEvent.change(screen.getByPlaceholderText('Tu nombre'), {
-			target: { value: 'Yoshua Lopez' },
+			target: { value: 'yellyoshua' },
 		});
 
 		expect(screen.getByText('Comenzar').closest('button')).toBeEnabled();
@@ -35,7 +35,7 @@ describe('Register page', () => {
 		// @ts-ignore
 		expect(createUserSession.mock.calls.length).toBe(1);
 		// @ts-ignore
-		expect(createUserSession.mock.calls[0][0]).toBe('Yoshua Lopez');
+		expect(createUserSession.mock.calls[0][0]).toBe('yellyoshua');
 	});
 
 	it('should input disable button', () => {
@@ -44,7 +44,7 @@ describe('Register page', () => {
 		expect(screen.getByText('Comenzar').closest('button')).toBeDisabled();
 
 		fireEvent.change(screen.getByPlaceholderText('Tu nombre'), {
-			target: { value: 'Yo' },
+			target: { value: 'wrong-username' },
 		});
 
 		expect(screen.getByText('Comenzar').closest('button')).toBeDisabled();

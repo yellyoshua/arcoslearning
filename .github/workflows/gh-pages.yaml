@@ -51,7 +51,6 @@ jobs:
         run: npm run e2e
 
       - uses: actions/upload-artifact@v2
-        if: ${{ github.ref != 'refs/heads/master' }}
         with:
           name: test-artifacts
           path: public/e2e-reporter/

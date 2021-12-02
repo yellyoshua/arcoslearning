@@ -8,6 +8,17 @@ export class UsersRepository {
 		this.api = GetGraphqlClient();
 	}
 
+	/** @param {string} username */
+	async getSessionByUsername(username) {
+		const { session } = await this.api.request(
+			queries.GET_SESSION_BY_USERNAME,
+			{
+				username,
+			}
+		);
+		return { data: session };
+	}
+
 	/** @param {string} [name] */
 	async createSession(name) {
 		const { createSession } = await this.api.request(mutations.CREATE_SESSION, {
@@ -17,7 +28,7 @@ export class UsersRepository {
 		return { data: createSession };
 	}
 
-	/** @param {string} [sessionId] */
+	/** @param {string} sessionId */
 	async getSession(sessionId) {
 		const { session } = await this.api.request(queries.GET_SESSION_BY_ID, {
 			id: sessionId,

@@ -7,9 +7,9 @@ const usersController = new UsersController();
 /** @param {string} name */
 export const createUserSession = async (name) => {
 	useUserStore.setState({ loading: true });
-	const { id } = await usersController.createSession(name);
+	const { id, avatar } = await usersController.createSession(name);
 	useUserStore.setState({
-		user: { name: name, id, avatar: null },
+		user: { name, id, avatar },
 		loading: false,
 	});
 };
