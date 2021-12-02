@@ -12,6 +12,15 @@ export class UsersController {
 	 * @returns {Promise<UserSession>} session
 	 */
 	async createSession(userName) {
+		const existSession = await this.usersRepository.getSessionByUsername(
+			userName
+		);
+
+		if (existSession.data) {
+			const { id, name, avatar } = existSession.data;
+			return { id, name, avatar };
+		}
+
 		const response = await this.usersRepository.createSession(userName);
 		const { id, name, avatar } = response.data;
 		return { id, name, avatar };

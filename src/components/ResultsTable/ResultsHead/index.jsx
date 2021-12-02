@@ -7,7 +7,7 @@ export const ResultsHead = () => {
 			<tr>
 				<th scope='col'></th>
 				<th scope='col' className='text-left'>
-					Usuario
+					Jugador
 				</th>
 				<th scope='col' className='text-center'>
 					Juego

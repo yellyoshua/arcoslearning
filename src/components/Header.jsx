@@ -30,7 +30,7 @@ export default function Header() {
 				style={{ fontSize: 20, textShadow: '1px 1px rgb(84, 20, 20) 1px 1px' }}
 				className='text-danger d-flex align-items-center navbar-brand pt-3 px-2'
 			>
-				Jugadas
+				World Scores
 			</Link>
 
 			{user && user.name ? (
