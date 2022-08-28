@@ -8,12 +8,12 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('valid redirect and input from /register', () => {
 	test.skip('should register page', async ({ page }) => {
-		await Promise.allSettled([
+		await Promise.all([
 			expect(page).toHaveTitle(selector.siteTitle),
 			expect(page).toHaveURL(/\/register$/)
 		]);
 
-		await Promise.allSettled([
+		await Promise.all([
 			expect(page.locator(selector.textJugadasLink).first()).toHaveAttribute('href', '/scores'),
 			expect(page.locator(selector.formInputForUserName).first()).toBeVisible(),
 			expect(page.locator(selector.copyrigthText).first()).toBeVisible(),
