@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('valid redirect and input from /register', () => {
-	test('should redirect to register and check if contain the web title', async ({
+	test.skip('should redirect to register and check if contain the web title', async ({
 		page,
 	}) => {
 		await Promise.all([
