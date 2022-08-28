@@ -3,30 +3,24 @@ const { expect, test } = require('@playwright/test');
 const selector = require('./selectors');
 
 test.beforeEach(async ({ page }) => {
-	await page.goto('http://localhost:3000/');
+	await page.goto('http://127.0.0.1:3000/');
 });
 
 test.describe('valid redirect and input from /register', () => {
 	test('should redirect to register and check if contain the web title', async ({
 		page,
 	}) => {
-		await expect(page).toHaveTitle(selector.siteTitle);
+		await Promise.all([
+			expect(page).toHaveTitle(selector.siteTitle),
+			expect(page).toHaveURL('http://localhost:3000/register')
+		]);
 
-		await expect(page).toHaveURL('http://localhost:3000/register');
-
-		await expect(
-			page.locator(selector.textJugadasLink).first()
-		).toHaveAttribute('href', '/scores');
-
-		await expect(
-			page.locator(selector.formInputForUserName).first()
-		).toBeVisible();
-
-		await expect(page.locator(selector.copyrigthText).first()).toBeVisible();
-
-		await expect(
-			page.locator(selector.formSubmitButtonForRegister).first()
-		).toBeVisible();
+		await Promise.all([
+			expect(page.locator(selector.textJugadasLink).first()).toHaveAttribute('href', '/scores'),
+			expect(page.locator(selector.formInputForUserName).first()).toBeVisible(),
+			expect(page.locator(selector.copyrigthText).first()).toBeVisible(),
+			expect(page.locator(selector.formSubmitButtonForRegister).first()).toBeVisible()
+		]);
 	});
 
 	test('should input of name content be writted', async ({ page }) => {
