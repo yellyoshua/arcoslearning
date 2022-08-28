@@ -7,12 +7,12 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('valid redirect and input from /register', () => {
-	test.skip('should redirect to register and check if contain the web title', async ({
+	test('should redirect to register and check if contain the web title', async ({
 		page,
 	}) => {
 		await Promise.all([
 			expect(page).toHaveTitle(selector.siteTitle),
-			expect(page).toHaveURL('http://localhost:3000/register')
+			expect(page).toHaveURL('http://127.0.0.1:3000/register')
 		]);
 
 		await Promise.all([
