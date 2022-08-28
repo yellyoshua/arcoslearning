@@ -8,7 +8,7 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('valid redirect and input from /register', () => {
 	test('should register page', async ({ page }) => {
-		await Promise.all([
+		await Promise.allSettled([
 			expect(page.locator(selector.textJugadasLink).first()).toHaveAttribute('href', '/scores'),
 			expect(page.locator(selector.formInputForUserName).first()).toBeVisible(),
 			expect(page.locator(selector.copyrigthText).first()).toBeVisible(),
@@ -17,7 +17,7 @@ test.describe('valid redirect and input from /register', () => {
 	});
 
 	test('should contain the web title', async ({ page }) => {
-		await Promise.all([
+		await Promise.allSettled([
 			expect(page).toHaveTitle(selector.siteTitle),
 			expect(page).toHaveURL('http://127.0.0.1:3000/register')
 		]);
