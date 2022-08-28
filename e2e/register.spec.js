@@ -7,19 +7,19 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe('valid redirect and input from /register', () => {
-	test('should redirect to register and check if contain the web title', async ({
-		page,
-	}) => {
-		await Promise.all([
-			expect(page).toHaveTitle(selector.siteTitle),
-			expect(page).toHaveURL('http://127.0.0.1:3000/register')
-		]);
-
+	test('should register page', async ({ page }) => {
 		await Promise.all([
 			expect(page.locator(selector.textJugadasLink).first()).toHaveAttribute('href', '/scores'),
 			expect(page.locator(selector.formInputForUserName).first()).toBeVisible(),
 			expect(page.locator(selector.copyrigthText).first()).toBeVisible(),
 			expect(page.locator(selector.formSubmitButtonForRegister).first()).toBeVisible()
+		]);
+	});
+
+	test('should contain the web title', async ({ page }) => {
+		await Promise.all([
+			expect(page).toHaveTitle(selector.siteTitle),
+			expect(page).toHaveURL('http://127.0.0.1:3000/register')
 		]);
 	});
 
@@ -33,9 +33,7 @@ test.describe('valid redirect and input from /register', () => {
 		expect(name).toBe(nameShort);
 	});
 
-	test('should input of name validate limit of 15 characters', async ({
-		page,
-	}) => {
+	test('should input of name validate limit of 15 characters', async ({ page }) => {
 		const nameLarge = 'Yoshua Erick Lopez';
 
 		await page.fill(selector.formInputForUserName, nameLarge);
