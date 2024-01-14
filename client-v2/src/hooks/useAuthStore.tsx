@@ -1,25 +1,27 @@
 import { create } from "zustand";
-import playersService from "../services/players.service";
+import {persist} from 'zustand/middleware';
 
 type AuthStore = {
 	user: any;
 	loading: boolean;
 	player: any;
-	getPlayer: () => Promise<void>;
+	reset: () => void;
 };
 
-export default create<AuthStore>((set, get) => ({
+const initialState = {
 	user: null,
 	player: null,
 	loading: true,
-	getPlayer: async () => {
-		set({ loading: true });
+}
 
-		if (get().user?.id) {
-			const [player] = await playersService.get({user: get().user.id})
-			set({ player, loading: false });
-		}
+const useAuthStore = create<AuthStore>()(
+	persist(
+		(set, get) => ({
+			...initialState,
+			reset: () => set(initialState),
+		}),
+		{name: 'arcoslearning-auth', version: 1}
+	)
+);
 
-		set({ loading: false });
-	}
-}));
+export default useAuthStore;

@@ -17,7 +17,7 @@ export default function RegisterAvatar() {
 		if (changingAvatar) return;
 
 		setChangingAvatar(true);
-		const [updated_player_avatar] = await toasEmit.wait(playersService.update(player.id, {avatar, user: user.id}), {
+		const [updated_player_avatar] = await toasEmit.wait(playersService.update(player.id, {avatar, user_id: user.id}), {
 			pending: 'Seleccionando avatar...',
 			success: 'Avatar cambiado',
 			error: 'Error al cambiar el avatar'

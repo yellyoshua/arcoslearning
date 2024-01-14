@@ -3,6 +3,13 @@ import { createClient } from '@supabase/supabase-js'
 const client = createClient(
 	import.meta.env.VITE_SUPABASE_URL,
 	import.meta.env.VITE_SUPABASE_KEY,
+	{
+		auth: {
+			autoRefreshToken: true,
+			detectSessionInUrl: true,
+			persistSession: true,
+		}
+	}
 );
 
 type GetOptions = {
@@ -44,15 +51,13 @@ export default function crud(service?: string, schema: string = 'public') {
 			if (error) throw error
 			return response
 		},
-		update: async (id: string, data: any, options?: UpdateOptions) => {
-			const client_instance = client
+		update: async (id: string, data: any) => {
+			const { data: response, error } = await client
 			.schema(schema)
-			.from(service!);
-
-			const { data: response, error } = await client_instance
-				.update(data)
-				.eq('id', id)
-				.select();
+			.from(service!)
+			.update(data)
+			.eq('id', id)
+			.select();
 
 			if (error) throw error
 			return response
@@ -68,7 +73,7 @@ export default function crud(service?: string, schema: string = 'public') {
 			if (error) throw error
 			return response
 		},
-		raw: client.from(service!),
+		raw: client.schema(schema).from(service!),
 		auth: client.auth,
 	}
 }

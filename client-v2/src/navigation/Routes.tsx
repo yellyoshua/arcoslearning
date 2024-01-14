@@ -5,6 +5,10 @@ import { ToastContainer } from 'react-toastify';
 import HomePage from "../pages/HomePage";
 import RegisterPage from "../pages/RegisterPage";
 import Authentication from "../components/Authentication";
+import InitialDataLoader from "../components/InitialDataLoader";
+import OnboardingRedirect from "../components/OnboardingRedirect";
+import OnboardingPage from "../pages/OnboardingPage";
+import Loading from "../components/Loading";
 
 export default function Routes() {
   return (
@@ -18,10 +22,23 @@ export default function Routes() {
 						</Authentication>
 					)
 				} />
+				<Route path="/onboarding" component={
+					() => (
+						<Authentication>
+							<InitialDataLoader>
+								<OnboardingPage />
+							</InitialDataLoader>
+						</Authentication>
+					)
+				} />
 				<Route path="/" component={
 					() => (
 						<Authentication>
-							<HomePage />
+							<InitialDataLoader>
+								<OnboardingRedirect>
+									<HomePage />
+								</OnboardingRedirect>
+							</InitialDataLoader>
 						</Authentication>
 					)
 				} />

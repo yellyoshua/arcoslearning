@@ -13,6 +13,7 @@ type AuthenticationProps = {
 export default function Authentication({ isPublic = false, children}: AuthenticationProps) {
 	const loading = useAuthStore(useShallow(state => state.loading));
 	const user = useAuthStore(useShallow(state => state.user));
+	const reset = useAuthStore(useShallow(state => state.reset));
 
 	useEffect(() => {
 		const eventState = authService.service.onAuthStateChange(
@@ -21,7 +22,7 @@ export default function Authentication({ isPublic = false, children}: Authentica
 					const isSignedOut = ['SIGNED_OUT'].includes(event) || !session;
 
 					if (isSignedOut) {
-						useAuthStore.setState({user: null});
+						reset();
 					}
 
 					if (!isSignedOut) {

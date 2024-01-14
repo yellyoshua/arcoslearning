@@ -15,11 +15,11 @@ export default function RegisterUsername() {
 
 	const checkUsernameAvailability = async (username: string, user: any) => {
 		const [playerWithUsername] = await playersService.get({username});
-		const matchWithUser = playerWithUsername?.user === user.id;
+		const matchWithUser = playerWithUsername?.user_id === user.id;
 
 		if (playerWithUsername && !matchWithUser) throw new Error('Username not available');
-		if (player?.id) await playersService.update(player.id, {username, user: user.id});
-		return await playersService.create({username, user: user.id});
+		if (player?.id) await playersService.update(player.id, {username, user_id: user.id});
+		return await playersService.create({username, user_id: user.id});
 	}
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
