@@ -2,7 +2,6 @@ import { create } from "zustand";
 import playersService from "../services/players.service";
 
 type AuthStore = {
-	isSignedIn: boolean;
 	user: any;
 	loading: boolean;
 	player: any;
@@ -10,7 +9,6 @@ type AuthStore = {
 };
 
 export default create<AuthStore>((set, get) => ({
-	isSignedIn: false,
 	user: null,
 	player: null,
 	loading: true,

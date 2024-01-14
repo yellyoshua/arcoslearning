@@ -8,7 +8,7 @@ export default function RegisterPage() {
 			<NavigationHeader/>
 
 			<p className="m-auto text-lg text-slate-300 max-w-xs p-2 bg-gray-900 rounded-lg shadow-xl">
-				Te enviaremos un código mágico por correo electrónico para que puedas conectarte sin contraseña.
+				Te enviaremos un enlace por correo electrónico para que puedas iniciar sesión sin contraseña.
 			</p>
 
 			<SignInForm />

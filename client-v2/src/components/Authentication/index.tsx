@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { Redirect } from "wouter";
+import {useShallow} from 'zustand/react/shallow';
+import useAuthStore from "../../hooks/useAuthStore";
 import authService from "../../services/auth.service";
-import { useLocation, useRoute, useRouter } from "wouter";
+import Loading from "../Loading";
 
 type AuthenticationProps = {
 	isPublic?: boolean;
@@ -8,21 +11,42 @@ type AuthenticationProps = {
 }
 
 export default function Authentication({ isPublic = false, children}: AuthenticationProps) {
-	const [, setLocation] = useLocation();
+	const loading = useAuthStore(useShallow(state => state.loading));
+	const user = useAuthStore(useShallow(state => state.user));
 
 	useEffect(() => {
-		const unsubscribe = authService.onAuthStateChange((status) => {
-			if (status.isSignedIn && isPublic) {
-				return setLocation('/');
-			}
+		const eventState = authService.service.onAuthStateChange(
+			(event, session) => {
+				if (['SIGNED_IN', 'SIGNED_OUT'].includes(event)) {
+					const isSignedOut = ['SIGNED_OUT'].includes(event) || !session;
 
-			if (!status.isSignedIn && !isPublic) {
-				return setLocation('/register');
-			}
-		});
+					if (isSignedOut) {
+						useAuthStore.setState({user: null});
+					}
 
-		return () => unsubscribe();
+					if (!isSignedOut) {
+						useAuthStore.setState({user: session?.user});
+					}
+				}
+
+				useAuthStore.setState({loading: false});
+			}
+		);
+
+		return () => eventState.data.subscription.unsubscribe();
 	}, []);
+
+	if (loading) {
+		return <Loading />
+	}
+
+	if (user && isPublic) {
+		return <Redirect to='/' />;
+	}
+
+	if (!user && !isPublic) {
+		return <Redirect to='/register' />;
+	}
 
 	return <>{children}</>
 }

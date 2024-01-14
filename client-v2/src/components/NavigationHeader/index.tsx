@@ -7,13 +7,12 @@ import useAuthStore from '../../hooks/useAuthStore';
 import authService from '../../services/auth.service';
 
 export default function NavigationHeader() {
-	const isSignedIn = useAuthStore(state => state.isSignedIn);
+	const user = useAuthStore(state => state.user);
 	const [isSigningOut, setIsSigningOut] = useState(false);
 
 	const signOut = async () => {
 		setIsSigningOut(true);
 		await authService.signOut();
-		setIsSigningOut(false);
 	}
 
 	return (
@@ -37,11 +36,11 @@ export default function NavigationHeader() {
 				World Scores
 			</Link>
 
-			{isSignedIn && <button onClick={signOut} className='px-3 py-1 bg-red-600 text-white rounded-md ml-2'>
+			{user && <button onClick={signOut} className='px-3 py-1 bg-red-600 text-white rounded-md ml-2'>
 				Cerrar sessi&oacute;n
 			</button>}
 
-			{isSignedIn && <Avatar
+			{user && <Avatar
 				image={'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png'}
 				onPress={() => {/* Remove profile photo? */}}
 			/>}
