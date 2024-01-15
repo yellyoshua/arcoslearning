@@ -1,9 +1,6 @@
 import { useState } from "react";
-import { useDebounceFn } from "ahooks";
 import useToasEmit from "../../hooks/useToasEmit";
-import playersService from "../../services/players.service";
 import authService from "../../services/auth.service";
-// import useDebounce from "../../hooks/useDebounce";
 
 export default function SignInForm() {
 	const [email, setEmail] = useState<string>('');
@@ -28,7 +25,7 @@ export default function SignInForm() {
 		<form className="flex justify-center" onSubmit={handleSubmit}>
 			<input
 				className="rounded-xl px-2 py-1 w-64 h-10"
-				type="text"
+				type="email"
 				onChange={(e) => setEmail(e.target.value)}
 				value={email}
 				placeholder="Correo electrónico"

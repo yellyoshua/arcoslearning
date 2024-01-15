@@ -20,7 +20,8 @@ export default function InitialDataLoader(props: InitialDataLoaderProps) {
 	};
 
 	const getAssigments = async () => {
-		const assignments = await assignmentsService.get({});
+		const assignments = await assignmentsService.get({}, {select: 'id, name, cover'});
+		console.log('assignments :', assignments);
 		useAssignmentsStore.setState({ assignments });
 	}
 

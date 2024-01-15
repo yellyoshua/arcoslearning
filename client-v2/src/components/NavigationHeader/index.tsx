@@ -32,7 +32,7 @@ export default function NavigationHeader() {
 				Arcos Learning
 			</a>
 
-			<Link to='/scores' style={{ fontSize: 20, textShadow: '1px 1px rgb(84, 20, 20) 1px 1px' }} className='text-red-600 flex items-center pt-3 px-2'>
+			<Link to='/leaderboard' style={{ fontSize: 20, textShadow: '1px 1px rgb(84, 20, 20) 1px 1px' }} className='text-red-600 flex items-center pt-3 px-2'>
 				World Scores
 			</Link>
 

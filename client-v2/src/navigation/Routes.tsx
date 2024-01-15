@@ -1,14 +1,14 @@
 
 import { Redirect, Route, Switch } from "wouter";
 import { ToastContainer } from 'react-toastify';
-
-import HomePage from "../pages/HomePage";
-import RegisterPage from "../pages/RegisterPage";
 import Authentication from "../components/Authentication";
 import InitialDataLoader from "../components/InitialDataLoader";
 import OnboardingRedirect from "../components/OnboardingRedirect";
+
+import HomePage from "../pages/HomePage";
+import RegisterPage from "../pages/RegisterPage";
 import OnboardingPage from "../pages/OnboardingPage";
-import Loading from "../components/Loading";
+import AssessmentsPage from "../pages/AssessmentsPage";
 
 export default function Routes() {
   return (
@@ -19,6 +19,17 @@ export default function Routes() {
 					() => (
 						<Authentication isPublic>
 							<RegisterPage />
+						</Authentication>
+					)
+				} />
+				<Route path="/assessments" component={
+					() => (
+						<Authentication>
+							<InitialDataLoader>
+								<OnboardingRedirect>
+									<AssessmentsPage />
+								</OnboardingRedirect>
+							</InitialDataLoader>
 						</Authentication>
 					)
 				} />
@@ -44,6 +55,7 @@ export default function Routes() {
 				} />
 				<Redirect to="/" />
 			</Switch>
+
 			{/* @ts-ignore */}
 			<ToastContainer
 				position='top-right'

@@ -1,15 +1,21 @@
-import { useState } from "react";
 import { Link } from "wouter";
 import Footer from "../components/Footer";
 import NavigationHeader from "../components/NavigationHeader";
 import useAssignmentsStore from "../hooks/useAssignmentsStore";
+import bucketService from "../services/bucket.service";
 
 export default function HomePage() {
 	const assignments = useAssignmentsStore((state) => state.assignments);
-	const [query, setQuery] = useState(() => {
-		const query = new URLSearchParams(window.location.search);
-		return Object.fromEntries(query);
-	});
+
+	const selectAssignment = (assignmentId: string) => {
+		useAssignmentsStore.setState({assignment: assignmentId});
+	}
+
+	const getInitials = (name: string) => {
+		const words = name.split(' ');
+		const initials = words.map((word) => word.charAt(0));
+		return initials.join('.');
+	}
 
 	return (
 		<div className="max-w-4xl grid gap-6">
@@ -22,12 +28,18 @@ export default function HomePage() {
 			<div className="grid grid-cols-2">
 				{
 					assignments.map((assignment) => (
-						<Link to={`/?assignment=${assignment.id}`} onClick={() => setQuery(state => ({...state, assignments: assignment.id}))} key={`${assignment.name}`}>
-							<div className=" text-slate-600 hover:text-white transition-colors bg-white hover:bg-slate-700 p-3 m-3 rounded-xl cursor-pointer">
-								<div className='card-body text-center m-auto'>
-									<h3 className='card-text text-danger'>{assignment.name}</h3>
+						<Link key={`${assignment.id}`} to={`/assessments?assignment=${assignment.id}`} onClick={() => selectAssignment(assignment.id)}>
+							<a className="text-slate-600 bg-white hover:text-white transition-colors hover:bg-slate-700 m-3 rounded-xl overflow-hidden cursor-pointer grid grid-cols-[0.5fr_1fr]">
+								<div className="bg-cyan-300 grid place-items-center relative w-full">
+									{assignment.cover
+										? <img src={bucketService.getPublicUrl(assignment.cover)} alt={assignment.name} className="absolute top-0 left-0 w-full h-full object-cover" />
+										: <p className="font-bold">{getInitials(assignment.name)}</p>
+									}
 								</div>
-							</div>
+								<div className="p-3 flex items-center">
+									<p className="text-left text-base">{assignment.name}</p>
+								</div>
+							</a>
 						</Link>
 					))
 				}

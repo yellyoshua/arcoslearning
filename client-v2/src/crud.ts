@@ -13,7 +13,8 @@ const client = createClient(
 );
 
 type GetOptions = {
-	limit?: number
+	select?: string;
+	limit?: number;
 }
 
 type UpdateOptions = {
@@ -35,7 +36,7 @@ export default function crud(service?: string, schema: string = 'public') {
 			const { data: response, error } = await client
 				.schema(schema)
 				.from(service!)
-				.select('*')
+				.select(options?.select ?? '*')
 				.eq('id', id)
 				.single()
 			if (error) throw error
@@ -45,7 +46,7 @@ export default function crud(service?: string, schema: string = 'public') {
 			const { data: response, error, count } = await client
 				.schema(schema)
 				.from(service!)
-				.select('*')
+				.select(options?.select ?? '*')
 				.match(params)
 				.limit(options?.limit || 10)
 			if (error) throw error
@@ -75,5 +76,6 @@ export default function crud(service?: string, schema: string = 'public') {
 		},
 		raw: client.schema(schema).from(service!),
 		auth: client.auth,
+		bucket: client.storage.from(service!)
 	}
 }
