@@ -1,4 +1,4 @@
-export default function timeConverter(duration: number): string {
+export default function timeConverter(duration: number = 1): string {
 	const minutes = Math.floor(duration / 60);
 
 	if (minutes === 60) {

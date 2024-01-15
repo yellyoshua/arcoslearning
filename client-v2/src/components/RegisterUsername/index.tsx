@@ -1,7 +1,5 @@
 import { useState } from "react";
 import useToasEmit from "../../hooks/useToasEmit";
-import Footer from "../Footer";
-import NavigationHeader from "../NavigationHeader";
 import useAuthStore from "../../hooks/useAuthStore";
 import playersService from "../../services/players.service";
 
@@ -42,9 +40,7 @@ export default function RegisterUsername() {
 	}
 
 	return (
-		<div className="max-w-4xl grid grid-rows-5 gap-6 h-screen">
-			<NavigationHeader />
-
+		<div className="max-w-4xl grid grid-rows-3 gap-8">
 			<p className="text-center text-xl text-cyan-500" style={{textShadow: '1px 1px #7b8081'}}>
 				Okey, comenzemos pero antes debo saber...
 				<br /> ¿Qui&eacute;n eres?
@@ -67,8 +63,6 @@ export default function RegisterUsername() {
 					Continuar
 				</button>
 			</form>
-
-			<Footer />
 		</div>
 	);
 }

@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import useAuthStore from "../../hooks/useAuthStore";
 import { useShallow } from "zustand/react/shallow";
 import playersService from "../../services/players.service";
-import Loading from "../Loading";
 import assignmentsService from "../../services/assignments.service";
 import useAssignmentsStore from "../../hooks/useAssignmentsStore";
+import Loading from "../Loading";
 
 type InitialDataLoaderProps = {
 	children: React.ReactNode;
@@ -21,7 +21,6 @@ export default function InitialDataLoader(props: InitialDataLoaderProps) {
 
 	const getAssigments = async () => {
 		const assignments = await assignmentsService.get({}, {select: 'id, name, cover'});
-		console.log('assignments :', assignments);
 		useAssignmentsStore.setState({ assignments });
 	}
 
@@ -35,8 +34,10 @@ export default function InitialDataLoader(props: InitialDataLoaderProps) {
 			setLoading(false);
 		};
 
-		getInitialData();
-	}, []);
+		if (user) {
+			getInitialData();
+		}
+	}, [user?.id]);
 
 	if (loading) {
 		return <Loading />

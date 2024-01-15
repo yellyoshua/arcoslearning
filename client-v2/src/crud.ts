@@ -32,7 +32,7 @@ export default function crud(service?: string, schema: string = 'public') {
 			if (error) throw error
 			return response
 		},
-		getById: async (id: string, options?: GetOptions) => {
+		getById: async (id: string, options?: GetOptions): Promise<any> => {
 			const { data: response, error } = await client
 				.schema(schema)
 				.from(service!)
@@ -42,7 +42,7 @@ export default function crud(service?: string, schema: string = 'public') {
 			if (error) throw error
 			return response
 		},
-		get: async (params: Record<string, any> ,options?: GetOptions) => {
+		get: async (params: Record<string, any> ,options?: GetOptions): Promise<any[]> => {
 			const { data: response, error, count } = await client
 				.schema(schema)
 				.from(service!)

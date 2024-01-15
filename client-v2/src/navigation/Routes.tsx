@@ -9,52 +9,49 @@ import HomePage from "../pages/HomePage";
 import RegisterPage from "../pages/RegisterPage";
 import OnboardingPage from "../pages/OnboardingPage";
 import AssessmentsPage from "../pages/AssessmentsPage";
+import Layout from "../components/Layout";
 
 export default function Routes() {
   return (
-		<div>
-			<Switch>
-				<Route path="/privacy-policy" component={() => <h1>hola</h1>} />
-				<Route path="/register" component={
-					() => (
-						<Authentication isPublic>
-							<RegisterPage />
-						</Authentication>
-					)
-				} />
-				<Route path="/assessments" component={
-					() => (
-						<Authentication>
-							<InitialDataLoader>
+		<Layout>
+			<InitialDataLoader>
+				<Switch>
+					<Route path="/privacy-policy" component={() => <h1>hola</h1>} />
+					<Route path="/register" component={
+						() => (
+							<Authentication isPublic>
+								<RegisterPage />
+							</Authentication>
+						)
+					} />
+					<Route path="/assessments" component={
+						() => (
+							<Authentication>
 								<OnboardingRedirect>
 									<AssessmentsPage />
 								</OnboardingRedirect>
-							</InitialDataLoader>
-						</Authentication>
-					)
-				} />
-				<Route path="/onboarding" component={
-					() => (
-						<Authentication>
-							<InitialDataLoader>
+							</Authentication>
+						)
+					} />
+					<Route path="/onboarding" component={
+						() => (
+							<Authentication>
 								<OnboardingPage />
-							</InitialDataLoader>
-						</Authentication>
-					)
-				} />
-				<Route path="/" component={
-					() => (
-						<Authentication>
-							<InitialDataLoader>
+							</Authentication>
+						)
+					} />
+					<Route path="/" component={
+						() => (
+							<Authentication>
 								<OnboardingRedirect>
 									<HomePage />
 								</OnboardingRedirect>
-							</InitialDataLoader>
-						</Authentication>
-					)
-				} />
-				<Redirect to="/" />
-			</Switch>
+							</Authentication>
+						)
+					} />
+					<Redirect to="/" />
+				</Switch>
+			</InitialDataLoader>
 
 			{/* @ts-ignore */}
 			<ToastContainer
@@ -69,6 +66,6 @@ export default function Routes() {
 				draggable
 				pauseOnHover
 			/>
-		</div>
+		</Layout>
   );
 }

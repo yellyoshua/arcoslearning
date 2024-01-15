@@ -1,7 +1,5 @@
 import { useState } from "react";
 import useToasEmit from "../../hooks/useToasEmit";
-import Footer from "../Footer";
-import NavigationHeader from "../NavigationHeader";
 import useAuthStore from "../../hooks/useAuthStore";
 import playersService from "../../services/players.service";
 import avatars from "../../avatars";
@@ -28,8 +26,6 @@ export default function RegisterAvatar() {
 
 	return (
 		<div className="max-w-4xl grid gap-6">
-			<NavigationHeader/>
-
 			<p className="text-center text-xl text-cyan-500 " style={{textShadow: '1px 1px #7b8081'}}>
 				Ahora, elige tu avatar
 			</p>
@@ -43,8 +39,6 @@ export default function RegisterAvatar() {
 					))
 				}
 			</div>
-
-			<Footer />
 		</div>
 	);
 }
