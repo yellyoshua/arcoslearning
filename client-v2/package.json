@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@heroicons/react": "2.1.1",
+    "@sentry/vite-plugin": "^2.10.2",
     "@supabase/supabase-js": "2.39.2",
     "ahooks": "3.7.8",
     "dayjs": "1.11.10",

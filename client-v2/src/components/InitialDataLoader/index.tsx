@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import useAuthStore from "../../hooks/useAuthStore";
 import { useShallow } from "zustand/react/shallow";
+import useAuthStore from "../../hooks/useAuthStore";
 import playersService from "../../services/players.service";
 import assignmentsService from "../../services/assignments.service";
 import useAssignmentsStore from "../../hooks/useAssignmentsStore";
@@ -36,6 +36,10 @@ export default function InitialDataLoader(props: InitialDataLoaderProps) {
 
 		if (user) {
 			getInitialData();
+		}
+
+		if (!user) {
+			setLoading(false);
 		}
 	}, [user?.id]);
 

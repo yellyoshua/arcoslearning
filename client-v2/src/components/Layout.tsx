@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { Link } from 'wouter';
 import { useShallow } from 'zustand/react/shallow';
 import useAuthStore from '../hooks/useAuthStore';
+import authService from '../services/auth.service';
 import ArrowLeftStartOnRectangleIcon from '@heroicons/react/24/solid/ArrowLeftStartOnRectangleIcon'
 import Avatar from './Avatar';
 import Modal from './Modal.tsx';
 import { arrowDown } from '../icons';
-import authService from '../services/auth.service';
 
 type LayoutProps = {
 	children: React.ReactNode;
@@ -19,6 +19,7 @@ export default function Layout(props: LayoutProps) {
 	const signOut = async () => {
 		setIsSigningOut(true);
 		await authService.signOut();
+		setIsSigningOut(false);
 	}
 
 	const redirect = () => {

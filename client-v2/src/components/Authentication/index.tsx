@@ -26,7 +26,7 @@ export default function Authentication({ isPublic = false, children}: Authentica
 					}
 
 					if (!isSignedOut) {
-						useAuthStore.setState({user: session?.user});
+						useAuthStore.setState({user: session?.user, session: session});
 					}
 				}
 

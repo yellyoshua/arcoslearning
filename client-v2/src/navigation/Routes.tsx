@@ -1,9 +1,11 @@
 
+import { useEffect } from "react";
 import { Redirect, Route, Switch } from "wouter";
 import { ToastContainer } from 'react-toastify';
 import Authentication from "../components/Authentication";
 import InitialDataLoader from "../components/InitialDataLoader";
 import OnboardingRedirect from "../components/OnboardingRedirect";
+import { useAuthCheckSession } from "../hooks/useAuthStore";
 
 import HomePage from "../pages/HomePage";
 import RegisterPage from "../pages/RegisterPage";
@@ -11,7 +13,18 @@ import OnboardingPage from "../pages/OnboardingPage";
 import AssessmentsPage from "../pages/AssessmentsPage";
 import Layout from "../components/Layout";
 
+const ONE_MINUTE_IN_MILLISECONDS = 1000 * 60;
+
 export default function Routes() {
+	const {checkSession, checkSessionInterval} = useAuthCheckSession();
+
+	useEffect(() => {
+		const sessionInterval = checkSessionInterval(ONE_MINUTE_IN_MILLISECONDS);
+
+		checkSession();
+		return () => sessionInterval.clear();
+	}, []);
+
   return (
 		<Layout>
 			<InitialDataLoader>
